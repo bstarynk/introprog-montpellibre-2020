@@ -219,6 +219,11 @@ Un  \textcolor{red}{\textbf{octet}} (anglais: \textit{byte}) contient huit bits.
 \item entier signé entre -128 ($-2^7$) et +127 ($2^7-1$)
 
 \item codage de caractères (lettres, chiffres, ponctuation)
+\href{https://en.wikipedia.org/wiki/ASCII}{en.wikipedia.org/wiki/ASCII}
+
+\item codage universel Unicode UTF-8 sur un à quatre octets
+\href{https://en.wikipedia.org/wiki/UTF-8}{\texttt{en.wikipedia.org/wiki/UTF-8}}
+et \href{https://utf8everywhere.org/}{\texttt{utf8everywhere.org}}
 
 \end{itemize}
 \end{frame}
@@ -236,8 +241,82 @@ Voir \href{https://www.positron-libre.com/cours/electronique/logique-combinatoir
 Les portes \textbf{NAND} ou \textbf{NOR} sont \textit{universelles}
 
 \end{frame}
+
+
+\begin{frame}
+  \frametitle{Introduction}
+  \framesubtitle{Circuits logiques circulaires}
+
+La bascule flip-flop (verrou RS) à deux portes  \textbf{NOR} têtes-bêches. 
+\vspace{5cm}
+
+Voir \href{http://www.paturage.be/electro/inforauto/portes/bascule.html}{www.paturage.be/electro/inforauto/portes/bascule.html}
+
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Introduction}
+  \framesubtitle{Combinaisons de portes logiques}
+
+En combinant beaucoup (millions) de portes logiques on produit les microprocesseurs actuels (milliard de transistors, 
+AMD ThreadRipper Ryzen)
+
+\vspace{0.5cm}
+
+ \href{https://cdn.arstechnica.net/wp-content/uploads/2017/02/ryzen-die.jpg}{\texttt{cdn.arstechnica.net/wp-content/uploads/2017/02/ryzen-die.jpg}}
+
+ \vspace{0.5cm}
+ \includegraphics[width=0.7\textwidth]{ryzen-die.jpg}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Introduction}
+  \framesubtitle{Ordres de grandeurs économiques en 2020}
+
+\begin{itemize}
+\item investissement pour la R\&D, la fabrication, l'usine pour un microprocesseur haut de gamme: dix milliards de US\$
+\item nombre de transistors par puce: milliard
+\item prix de vente (après test): environ mille dollars / pièce (milliers)
+\item taux de rendement: quelques pourcents, la plupart des puces sont défaillantes
+\item taux de panne par porte : moins d'une défaillance par heure
+\item consommation énergetique du numérique: quelques pourcents de la production électrique française
+\item prix de vente d'un ordinateur: centaines d'euros.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Introduction}
+  \framesubtitle{Ordres de grandeurs technologiques en 2020}
+ 
+\begin{itemize}
+\item 8 c{\oe}urs de processeur à 3GHz
+\item mémoire cache: 16 Mo (accès 10ns, bande passante 0,5To/s)
+\item taille mémoire RAM d'un ordinateur : 32 Goctets
+\item temps d'accès RAM: 200 ns
+\item bande passante RAM: centaine Mo/seconde
+\item taille disque SSD : un téra-octets
+\item puissance thermique dissipée en charge: 250W
+\item temps d'accès SSD: 50 microsecondes pour un bloc de 4Ko.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{Introduction}
+  \framesubtitle{Vue interne d'un ordinateur de bureau en 2020}
+
+\href{https://images.app.goo.gl/BMQxP7c4Zcyrh3XD7}{images.app.goo.gl/BMQxP7c4Zcyrh3XD7}
+
+\includegraphics[width=0.66\textwidth]{interieur-ordinateur.png}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%a%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Local Variables: ;;
 %% compile-command: "./build.sh" ;;
 %% End: ;;
