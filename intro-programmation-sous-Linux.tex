@@ -54,7 +54,7 @@
    gitid=gitpip:read()
    gitpip:close()
  \end{luacode*}
- \newcommand{\mygitid}{\luadirect{tex.print(gitid)}}
+  \newcommand{\mygitid}{\luadirect{tex.print(gitid)}}
 
 %{% open a Local TeX Group
 %\setbeamertemplate{sidebar}{}
@@ -284,6 +284,7 @@ AMD ThreadRipper Ryzen)
 \item taux de panne par porte : moins d'une défaillance par heure
 \item consommation énergetique du numérique: quelques pourcents de la production électrique française
 \item prix de vente d'un ordinateur: centaines d'euros.
+\item plusieurs "ordinateurs" par habitant (microcontrôleurs, informatique embarquée, téléphones portables, datacenters)
 \end{itemize}
 \end{frame}
 
@@ -315,6 +316,30 @@ AMD ThreadRipper Ryzen)
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{couches logicielles}
+
+\begin{frame}
+  \frametitle{Couches logicielles}
+  \framesubtitle{Les différents types de logiciels}
+
+\begin{itemize}
+
+\item logiciel et langage de description des circuits (VHDL, SystemC)
+\item firmware - interne à la souris (langage machine 8051), au disque dur, à la carte réseau
+\item logiciel de démarrage (UEFI, BIOS): charge le système d'exploitation
+\item noyau (par exemple Linux) du système d'exploitation, gère les fichiers
+\item utilitaires systèmes (gestion du réseau, ...)
+\item interface graphique ou navigateur Web
+\item bibliothèques logicielles standard (\href{http://qt.io}{Qt}, \texttt{libc})
+\item outils logiciels pour le développeur (compilateur)
+\item logiciels applicatifs (bureautique) ou métiers (aéronautique)
+\item scripts utilisateurs et fichiers de configuration
+\item commandes, schémas de bases de données, langage d'imprimante
+
+\end{itemize}
+\end{frame}
+
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%a%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Local Variables: ;;
