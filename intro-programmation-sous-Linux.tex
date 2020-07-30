@@ -37,15 +37,15 @@
   frenchlinks = true,
 }
 
-\usetheme[hideothersubsections]{Bismon}
+\usetheme{Montpellier}
 
 
 
 \title{\textsc{Introduction à la Programmation} \\
 (sous Linux)}
-\author[B.Starynkevitch]{Basile \textsc{Starynkevitch} - \href{http://starynkevitch.net/Basile/}{\texttt{starynkevitch.net/Basile}}\\ \href{mailto:basile@starynkevitch.net}{\color{blue}{\texttt{basile@starynkevitch.net}}}
+\author[B.Starynkevitch]{Basile \textsc{Starynkévitch} - \href{http://starynkevitch.net/Basile/}{\texttt{starynkevitch.net/Basile}}\\ \href{mailto:basile@starynkevitch.net}{\color{blue}{\texttt{basile@starynkevitch.net}}}
 } %
-\institute{MontPellibre}
+\institute{MontPellibre (Montpellier)}
 \date{été 2020}
 
 \begin{document}
@@ -66,18 +66,98 @@
         \textcolor{brown}{{\large \textbf{Les opinions me sont personnelles}} }
         
         \begin{center}
-          git \texttt{\mygitid}
+          git \texttt{\mygitid} ~ 
+          \href{https://montpellibre.fr/spip.php?article4875}{https://montpellibre.fr/spip.php?article4875}
         \end{center}
    \end{relsize}
 \end{frame}
 %}% end Local TeX Group
-s
-    \hrule
+
+ \begin{frame}
+    \frametitle{Licence}
     
    Ces transparents sont sous license \href{https://creativecommons.org/licenses/by-sa/4.0/}{\includegraphics[scale=0.75]{CC-BY-SA-4}} \relsize{-1}{(CC-BY-SA-4)}
-
+ \end{frame}
+ 
 \section{Introduction}
 
+
+\begin{frame}
+  \frametitle{Introduction}
+  \framesubtitle{Qu'est ce que l'information}
+
+  \begin{block}{un bit}
+
+    \textbf{Quantité ``élémentaire'' d'information}. \textcolor{red}{Le jeu de pile ou face} transmet approximativement \textcolor{purple}{\textbf{un bit}}, car il y a $2 = 2^1$ possibilités
+    
+  \end{block}
+
+  Remarques:
+  \begin{itemize}
+  \item on a fait \textbf{abstraction} des autres possibilités (la pièce perdue dans le caniveau ...)
+  \item on a fait une \textbf{simplification} et une \textbf{modélisation} de la réalité.
+    \item on a évidemment $log_2 ~ 2 = 1$ car $2 = 2^1$
+  \end{itemize}
+
+  Mais l'\emph{abstraction}, la \emph{simplification}, la \emph{modélisation} sont \textbf{au c{\oe}ur de l'activité de programmation}.
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Introduction}
+  \framesubtitle{Combien de bits transmis au jeu de dés?}
+  
+  \textbf{un dé a 6 faces}, donc plus de 2 et moins de 3 bits transmis, puisque
+  $4 = 2^2 < 6 < 2^3 = 8$
+
+  \vspace{1cm}
+
+  \emph{``informatiquement''} on a transmis $log_2~ 6$ bits, donc $\approx 2,58496$ bits
+
+  \vspace{1cm}
+
+  Q: \textit{combien de bits pour le jeu de la roulette?} (36 cas)
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Introduction}
+  \framesubtitle{Que faire avec un bit}
+
+  
+  \textbf{Représenter toutes choses à deux possibilités}
+  
+  \begin{itemize}
+
+  \item valeur de vérité en logique : \textbf{vrai} ou \textbf{faux}
+
+  \item comparaison ($<$ ou $>$) entre deux grandeurs (longueur, tension électrique, etc...)
+  \item chiffre binaire
+
+    \item signe $+$ ou $-$
+  \end{itemize}
+
+  \vspace{1cm}
+
+  \textbf{Distinction entre \textcolor{red}{chiffre} et \textcolor{red}{nombre}}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Introduction}
+  \framesubtitle{Comment représenter \emph{physiquement} un bit}
+
+  Utiliser, ou simplifier, par un \textbf{phénomène physique à \textcolor{red}{deux états}}
+
+  \begin{itemize}
+  \item interrupteur marche/arrêt (donc tension électrique: $\approx 0V$ vs $1V$ à $3V$)
+  \item pendule mécanique (à gauche ou à droite), horlogerie (Babbage)
+    \item onde sonore
+    \item magnétisation (tambour, disque dur)
+  \item tubes à vide (ENIAC), transistors, circuits intégrés
+  \item etc...
+  \end{itemize}
+  
+\end{frame}
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Local Variables: ;;
