@@ -79,6 +79,19 @@
    Ces transparents sont sous license \href{https://creativecommons.org/licenses/by-sa/4.0/}{\includegraphics[scale=0.75]{CC-BY-SA-4}} \relsize{-1}{(CC-BY-SA-4)}
  \end{frame}
  
+ \begin{frame}
+    \frametitle{Plan}
+    
+   \tableofcontents
+ \end{frame}
+
+
+ \AtBeginSection[]{
+   \begin{frame}{Sommaire}
+     \small \tableofcontents[currentsection, hideothersubsections]
+   \end{frame}
+ }
+ 
 \section{Introduction}
 
 
@@ -157,6 +170,42 @@
   \item etc...
   \end{itemize}
   
+  \vspace{2mm}
+ 
+  NB. Certaines technologies {\relsize{-1}{(mémoire Flash, SSD, Clefs USB)}} représentent deux bits par 4 états. 
+  Mais le matériel est imparfait.
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Introduction}
+  \framesubtitle{Notation décimale, binaire,  octale, hexadécimale des nombres}
+
+
+  \begin{itemize}
+    \item
+    \textit
+   {cent vingt trois} = $123$ \textcolor{red}{en décimal}
+  car $1 \times 10^2 + 2 \times 10^1 + 3 \times 10^0$
+
+  \item
+  \textit{dix} = $1010_b$ ou \texttt{0b1010}
+  \textcolor{red}{en binaire}
+  car $1  \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 0 \times 2^0$
+
+  \item
+  \textit{douze} = $14_o$ ou \texttt{014} ou \texttt{0o14}
+  \textcolor{red}{en octal}
+  car $1  \times 8^1 + 4 \times 8^0$
+
+  \item \textit{vingt} =  $14_h$ ou \texttt{0x14}
+  \textcolor{red}{en hexadécimal}
+  car $1  \times 16^1 + 4 \times 16^0$
+ 
+  \end{itemize}
+  
+  \vspace{1cm}
+  Remarque: un chiffre octal correspond à 3 bits; un chiffre hexadécimal correspond à 4 bits.
 \end{frame}
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
