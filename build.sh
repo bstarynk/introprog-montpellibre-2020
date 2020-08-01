@@ -3,8 +3,8 @@
 # in http://github.com/bstarynk/bismon/
 for svgfile in *.svg ; do
     svgbase=$(basename $svgfile .svg)
-    inkscape --without-gui --export-pdf=$svgbase.pdf $svgfile
-    inkscape --without-gui --export-eps=$svgbase.eps $svgfile
+    inkscape --batch-process --export-filename=$svgbase.pdf --export-type=pdf $svgfile
+    inkscape --batch-process --export-filename=$svgbase.eps  --export-type=eps $svgfile
 done
 for dotfile in *.dot ; do
     dotbase=$(basename $dotfile .dot)
