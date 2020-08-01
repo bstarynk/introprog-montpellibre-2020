@@ -76,7 +76,7 @@
  \begin{frame}
     \frametitle{Licence}
     
-   Ces transparents sont sous license \href{https://creativecommons.org/licenses/by-sa/4.0/}{\includegraphics[scale=0.75]{CC-BY-SA-4}} \relsize{-1}{(CC-BY-SA-4)}
+   Ces transparents sont sous licence \href{https://creativecommons.org/licenses/by-sa/4.0/}{\includegraphics[scale=0.75]{CC-BY-SA-4}} \relsize{-1}{(CC-BY-SA-4)}
  \end{frame}
  
  \begin{frame}
@@ -350,14 +350,14 @@ AMD ThreadRipper Ryzen)
 \item logiciel et langage de description des circuits (VHDL, SystemC)
 \item firmware - interne à la souris (langage machine 8051), au disque dur, à la carte réseau
 \item logiciel de démarrage (UEFI, BIOS): charge le système d'exploitation
-\item noyau (par exemple Linux) du système d'exploitation, gère les fichiers
+\item noyau (par exemple Linux) du système d'exploitation, gère les fichiers et les processus
 \item utilitaires systèmes (gestion du réseau, ...)
 \item interface graphique ou navigateur Web
 \item bibliothèques logicielles standard (\href{http://qt.io}{Qt}, \texttt{libc})
 \item outils logiciels pour le développeur (compilateur)
 \item logiciels applicatifs (bureautique) ou métiers (aéronautique)
 \item scripts utilisateurs et fichiers de configuration
-\item commandes, schémas de bases de données, langage d'imprimante
+\item commandes, schémas de bases de données, langage d'imprimante (PDF, ...)
 
 \end{itemize}
 \end{frame}
@@ -400,9 +400,14 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
   personnel. \textbf{\textcolor{red}{Règlement Général sur la
       Protection des Données}}
 
+ \vspace{0.5cm}
   Voir
   \href{https://donnees-rgpd.fr/definitions/rgpd-pour-les-nuls/}{\texttt{donnees-rgpd.fr/definitions/rgpd-pour-les-nuls}}, \href{https://www.laquadrature.net}{\texttt{www.laquadrature.net}} et \href{https://april.org/}{\texttt{april.org}} 
   pour en savoir plus.
+  
+  \vspace{0.5cm}
+
+  \textcolor{red}{Les pénalités sont dissuasives}
 \end{frame}
 
 \begin{frame}
@@ -436,7 +441,7 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
    
     \vspace{0.3cm}
  
-    PS. Attention aux incompatibilités de licences logiciels entre composants logiciels
+    PS. Attention aux incompatibilités de licences logicielles entre composants logiciels
 \end{frame}
 
 
@@ -446,17 +451,39 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 
   \textbf{Code binaire} ou \textbf{code machine} \\
   Il est executé par l'ordinateur. Totalement illisible.
+  \textcolor{red}{\textbf{Toujours généré}} par d'autres logiciels.
 
     \vspace{0.3cm}
   \textbf{Code source} \\
-  Il est développé par l'informaticien et partagé avec d'autres. Contient plein de choses pour les humains, inutiles aux ordinateurs.
+  \textcolor{red}{Il est écrit par l'informaticien et partagé avec d'autres développeurs}.
+  Contient plein de choses pour les humains, inutiles aux ordinateurs.
 
     \vspace{0.3cm}
   \textbf{Code intermédiaire} \\
-  Des logiciels transforment le code source en code binaire, en passant par des representations intermédiaires. Dont le  \textbf{code objet}.
+  Des logiciels transforment le code source en code binaire, en passant par des representations intermédiaires. Dont le  \textbf{code objet} (``object code'') et les bibliothèques partagées (``shared libraries'').
   
+    \vspace{0.3cm}
+    \textbf{Méta-programmation} \\
+    Beaucoup de logiciels manipulent, analysent, générent, gérent du code. Méta-programmer, c'est écrire \textcolor{red}{un programme qui manipule le code d'autres programmes}.
 \end{frame}
 
+
+
+\begin{frame}
+  \frametitle{Couches logicielles}
+  \framesubtitle{Jeu d'instructions machine et registres}
+
+  \textcolor{DarkGreen}{application binary interface}. Document (parfois, 800 pages)
+  décrivant le comportement souhaité d'un microprocesseur et son
+  \textbf{jeu d'instructions machine} (``instruction set architecture'')
+
+    \vspace{0.3cm}
+  \textcolor{red}{\textbf{registres d'un processeur}}. Mémoire
+  ultra-rapide sur la puce. Souvent, une à trois douzaines de mots de
+  32 à ou 64 bits
+    \vspace{0.3cm}
+    
+\end{frame}
 
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%a%%%%%%%%%%%%%%%%%%%%%%%%%%%
