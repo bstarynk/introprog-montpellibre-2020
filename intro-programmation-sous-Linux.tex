@@ -606,6 +606,62 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 
 \begin{frame}
   \frametitle{Couches logicielles}
+  \framesubtitle{mémoire virtuelle}
+
+  Les addresses (par exemple sur 32 bits) dans les registres ne correspondent pas \textbf{directement} à la mémoire physique DRAM.
+
+  Le noyau du système d'exploitation gère la \href{https://fr.wikipedia.org/wiki/Mémoire_virtuelle}{mémoire virtuelle} (Wikipedia)
+
+  \begin{tabular}{l|p{8.5cm}}
+    \includegraphics[width=0.30\textwidth]{Memoire-virtuelle} & %
+    \begin{minipage}[b]{7cm}
+      \begin{itemize}
+      \item l'\textbf{espace d'adressage} d'un processus est géré par \textbf{pages} de 4Ko
+      \item une page pourrait être (pour son processus): \begin{enumerate}
+      \item interdite d'accès
+      \item partagée avec d'autres processus
+      \item projetée (en lecture, en écriture) sur un bout de fichier
+      \item avec/sans du code machine exécutable 
+      \item à lecture seule
+      \item à lecture et écriture
+      \end{enumerate}
+      \end{itemize}
+    \end{minipage}
+  \end{tabular}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Couches logicielles}
+  \framesubtitle{pagination de la mémoire virtuelle}
+
+  Commande Linux
+  \href{https://man7.org/linux/man-pages/man1/pmap.1.html}{pmap(1)}
+  utilisant le système de pseudo-fichiers \texttt{/proc/}, voir
+  \href{https://man7.org/linux/man-pages/man5/proc.5.html}{proc(5)} et (pour cyber-sécurité) \href{https://fr.wikipedia.org/wiki/Address_space_layout_randomization}{Address space layout randomization}
+
+  Essayez \texttt{pmap \$\$} puis \texttt{/bin/cat /proc/self/maps} dans un terminal de commandes
+
+  Ou bien avec \texttt{sash}, le \href{https://en.wikipedia.org/wiki/Stand-alone_shell}{stand-alone shell}
+
+      \begin{alltt}
+    pmap 41424\\
+    41424:   sash\\
+    0000000000400000   1088K r-x-- sash\\
+    0000000000710000     28K rw--- sash\\
+    0000000000717000     12K rw---   [ anon ]\\
+    000000000217e000    140K rw---   [ anon ]\\
+    00007ffc09812000    132K rw---   [ pile  ]\\
+    00007ffc0989b000     12K r----   [ anon ]\\
+    00007ffc0989e000      4K r-x--   [ anon ]\\
+    ffffffffff600000      4K --x--   [ anon ]\\
+     total             1420K
+      \end{alltt}
+  
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Couches logicielles}
   \framesubtitle{Exemple: Architecture PowerPC : appel système}
   \includegraphics[width=0.60\textwidth]{powerpc-syscall-instr}
 \end{frame}
