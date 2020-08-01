@@ -68,6 +68,7 @@
         \begin{center}
           git \texttt{\mygitid} ~ 
           \href{https://montpellibre.fr/spip.php?article4875}{https://montpellibre.fr/spip.php?article4875}
+
         \end{center}
    \end{relsize}
 \end{frame}
@@ -76,7 +77,10 @@
  \begin{frame}
     \frametitle{Licence}
     
-   Ces transparents sont sous licence \href{https://creativecommons.org/licenses/by-sa/4.0/}{\includegraphics[scale=0.75]{CC-BY-SA-4}} \relsize{-1}{(CC-BY-SA-4)}
+    Ces transparents sont sous licence \href{https://creativecommons.org/licenses/by-sa/4.0/}{\includegraphics[scale=0.75]{CC-BY-SA-4}} \relsize{-1}{(CC-BY-SA-4)}
+
+    \vspace{1cm}
+          Le code \LaTeX ~ (\texttt{lualatex}) de cette présentation est en \href{https://github.com/bstarynk/introprog-montpellibre-2020/}{\texttt{github.com/bstarynk/introprog-montpellibre-2020}}
  \end{frame}
  
  \begin{frame}
@@ -471,7 +475,7 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 
 \begin{frame}
   \frametitle{Couches logicielles}
-  \framesubtitle{Jeu d'instructions machine et registres}
+  \framesubtitle{Jeu d'instructions machine, registres, conventions d'appel}
 
   \textcolor{DarkGreen}{application binary interface}. Document (parfois, 800 pages)
   décrivant le comportement souhaité d'un microprocesseur et son
@@ -480,10 +484,27 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
     \vspace{0.3cm}
   \textcolor{red}{\textbf{registres d'un processeur}}. Mémoire
   ultra-rapide sur la puce. Souvent, une à trois douzaines de mots de
-  32 à ou 64 bits
+ 16, 32 ou 64 bits
     \vspace{0.3cm}
     
+    \textcolor{red}{\textbf{conventions d'appel}}. Règles d'usage des registres, pour des sous-programmes différents puissent être assemblés ensemble.
+
+
+    \vspace{0.3cm}
+    \textcolor{red}{\textbf{exemples}}: {\large \href{https://riscv.org/}{\texttt{riscv.org}}} (cartes graphiques, microcontroleurs), \href{https://en.wikipedia.org/wiki/X86-64/}{\texttt{x86-64}} (PCs actuels), \href{https://fr.wikipedia.org/wiki/Architecture_ARM}{ARM} (tablettes, téléphones, automobile), \textsc{PowerPC}
+    \vspace{0.3cm}
+    
+    Le x86 (tous nos PCs) est \emph{très complexe} pour des raisons
+    historiques de compatibilité ascendante. Une vue pédagogique
+    simplifiée est le \href{http://siever.info/cs400/Y86.html}{Y86}
+    (fictif).
 \end{frame}
+
+\begin{frame}
+  \frametitle{Couches logicielles}
+  \framesubtitle{Exemple: Architecture PowerPC}
+\end{frame}
+
 
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%a%%%%%%%%%%%%%%%%%%%%%%%%%%%
