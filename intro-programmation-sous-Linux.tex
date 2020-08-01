@@ -659,6 +659,55 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
   
 \end{frame}
 
+\begin{frame}
+  \frametitle{Couches logicielles}
+  \framesubtitle{systèmes de fichiers - abstraction}
+
+
+  Les fichiers et répertoires ``n'existent pas'' et sont une abstraction fournie par le noyau du système d'exploitation. \textbf{\textcolor{red}{Les fichiers sont des séquences d'octets}} (souvent une dizaine, parfois des milliards).
+
+  Conventions de nommage et d'accès (simplifiées)
+
+  \begin{itemize}
+
+  \item conventions des fichiers sous Linux documentées dans \href{https://man7.org/linux/man-pages/man7/hier.7.html}{\texttt{hier(7)}} \begin{itemize}
+  \item \texttt{/bin/} et \texttt{/sbin/}: executables essentiels.
+  \item \texttt{/usr/bin/} et \texttt{/usr/sbin/}: executables usuels.
+    \item \texttt{/etc/} : fichiers de configuration du système. Par
+      exemple \texttt{/etc/passwd} décrit les utilisateurs (et parfois
+      leur mot de passe), voir
+      \href{https://man7.org/linux/man-pages/man5/passwd.5.html}{passwd(5)}. \texttt{/etc/X11/xorg.conf}
+      configure le gestionnaire de fenêtres graphiques
+      \href{https://fr.wikipedia.org/wiki/X.Org}{X.Org}.
+      \item \texttt{/home/} : contient les répertoires domestiques (``home directory'') de chaque utilisateur. Par exemple \texttt{/home/basile/}
+      \item \texttt{/dev/} : contient les pseudo-fichiers correspondant aux périphériques (``device'', par exemple \texttt{/dev/cdrom}).
+  \end{itemize}
+    \item les \textbf{répertoires}, les  \textbf{liens symboliques} sont des fichiers
+  \end{itemize}
+
+\end{frame}
+  
+\begin{frame}
+  \frametitle{Couches logicielles}
+  \framesubtitle{systèmes de fichiers - conseils de nommage}
+
+  Voir \href{https://man7.org/linux/man-pages/man7/path_resolution.7.html}{\texttt{path\_resolution(7)}} pour ``comment ça marche''
+  
+  \begin{itemize}
+  \item éviter les caractères bizarres, par exemple espace ou tabulation
+  \item commencer et terminer un nom de fichier par une lettre ou chiffre ou blanc-souligné {\texttt{\_}}
+  \item les fichiers dont le nom commencent par un point \texttt{.} sont ``cachés''
+  \item les chemins \texttt{.} et \texttt{..} désignent le répertoire courant ou parent
+    \item l'extension (après un point) désigne par convention le type de contenu: \texttt{.html} pour du web, \texttt{.pdf} pour un document PDF, \texttt{.c} pour du code C, \texttt{.s} pour du code assembleur, \texttt{.so} pour une bibliothèque partagée ou un greffon (voir \href{https://man7.org/linux/man-pages/man3/dlopen.3.html}{dlopen(3)}), \textbf{etc...}
+  \end{itemize}
+
+
+  \vspace{0.3cm}
+  
+  \textbf{\textcolor{red}{importance de suivre les conventions}}
+\end{frame}
+
+
 
 \begin{frame}
   \frametitle{Couches logicielles}
