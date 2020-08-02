@@ -948,9 +948,10 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
   
 \end{frame}
 
+\subsection{fichiers et processus}
 
 \begin{frame}
-  \frametitle{Le noyau Linux}
+  \frametitle{Fichiers et processus}
   \framesubtitle{méta-données des fichiers}
 
   Voir \href{https://man7.org/linux/man-pages/man7/inode.7.html}{inode(7)} pour les détails, et \href{https://man7.org/linux/man-pages/man2/stat.2.html}{stat(2)} pour les interroger programmatiquement.
@@ -973,7 +974,7 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
 \end{frame}
 
 \begin{frame}
-  \frametitle{Le noyau Linux}
+  \frametitle{Fichiers et processus}
   \framesubtitle{exemple de méta-données d'un fichier}
   
         Exemple avec la commande
@@ -998,7 +999,7 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
 \end{frame}
 
 \begin{frame}
-  \frametitle{Le noyau Linux}
+  \frametitle{Fichiers et processus}
   \framesubtitle{les fichiers exécutables}
 
   Le noyau Linux peut exécuter dans un processus avec l'appel système
@@ -1031,7 +1032,7 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
 \end{frame}
 
 \begin{frame}
-  \frametitle{Le noyau Linux}
+  \frametitle{Fichiers et processus}
   \framesubtitle{Analyser ou modifier le contenu d'un fichier}
 
   \begin{itemize}
@@ -1058,6 +1059,46 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
   \end{itemize}
 \end{frame}
       
+
+\begin{frame}
+  \frametitle{Fichiers et processus}
+  \framesubtitle{Les processus}
+
+   \textbf{\textcolor{red}{Chaque processus est un programme \textcolor{FireBrick}{-fichier exécutable-} en train de tourner}} (en cours
+  d'exécution).  {\relsize{-1}{(Méta-données descriptives décrites dans
+  \href{https://man7.org/linux/man-pages/man7/credentials.7.html}{credentials(7)}
+  et accessibles via
+  \href{https://man7.org/linux/man-pages/man5/proc.5.html}{proc(5)},
+  notamment \texttt{/proc/self/} pour le processus courant)}}
+  
+  \begin{itemize}
+
+  \item commandes
+    \href{https://man7.org/linux/man-pages/man1/ps.1.html}{ps(1)} et
+    \href{https://man7.org/linux/man-pages/man1/top.1.html}{top(1)}
+    pour les lister {\relsize{-1}{(via le pseudo-système de fichiers \texttt{/proc/})}}
+    
+  \item un même exécutable (ou script) peut être exécuté par \emph{plusieurs}
+    processus en parallèle {\relsize{-1}{(exécution concurrente, en particulier
+    l'interprète de commande
+    \href{https://man7.org/linux/man-pages/man1/bash.1.html}{bash(1)}
+    qui lance des processus à partir de commandes)}}
+
+  \item \textbf{chaque processus a son propre espace d'adressage} virtuel modifiable par
+  \href{https://man7.org/linux/man-pages/man2/execve.2.html}{execve(2)},
+  \href{https://man7.org/linux/man-pages/man2/mmap.2.html}{mmap(2)},
+  \href{https://man7.org/linux/man-pages/man2/munmap.2.html}{munmap(2)},
+  \href{https://man7.org/linux/man-pages/man2/mprotect.2.html}{mprotect(2)}
+
+    \item \textbf{chaque processus a son identifiant unique numérique} (pid, ``process id'')
+  \href{https://man7.org/linux/man-pages/man2/getpid.2.html}{getpid(2)},
+    
+    \item \textbf{chaque processus est créé par son processus père} {\relsize{-1}{(sauf \texttt{/sbin/init}, de pid 1, démarré automagiquement par le noyau)}} dont le pid est renvoyé par
+  \href{https://man7.org/linux/man-pages/man2/getppid.2.html}{getppid(2)}. Il peut survivre à son père.
+    
+  \end{itemize}
+
+\end{frame}
 
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%a%%%%%%%%%%%%%%%%%%%%%%%%%%
