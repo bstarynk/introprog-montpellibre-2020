@@ -1096,7 +1096,7 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
   \href{https://man7.org/linux/man-pages/man2/sbrk.2.html}{sbrk(2)},
   \href{https://man7.org/linux/man-pages/man2/mprotect.2.html}{mprotect(2)}
 
-    \item \textbf{chaque processus a son identifiant unique numérique} (pid, ``process id'')
+    \item  \textbf{chaque processus a son identifiant unique numérique} (pid, ``process id'')
  accessible par \href{https://man7.org/linux/man-pages/man2/getpid.2.html}{getpid(2)}
     
     \item \textbf{chaque processus est créé par son processus père} {\relsize{-1}{(sauf \texttt{/sbin/init}, de pid 1, démarré automagiquement par le noyau)}} dont le pid est renvoyé par
@@ -1129,17 +1129,57 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
     \item \textbf{\textcolor{FireBrick}{terminaison prématurée}} en
       erreur par un signal (voir
       \href{https://man7.org/linux/man-pages/man7/signal.7.html}{signal(7)})
-      forcé par \textbf{un plantage} (ou abus de resources) du
+      forcé par \textbf{un plantage} (ou abus de resources; cf \href{https://man7.org/linux/man-pages/man2/setrlimit.2.html}{setrlimit(2)}) du
       programme de ce processus {\relsize{-1}{(division par 0, viol de
           l'espace d'adressage, dépassement de temps alloué,
           débordement d'espace disque, ...)}}
       
     \item \textbf{\textcolor{FireBrick}{terminaison forcée}} par un signal (voir 
-  \href{https://man7.org/linux/man-pages/man7/signal.7.html}{signal(7)}) \textbf{émis par un autre processus tueur} (via 
+  \href{https://man7.org/linux/man-pages/man7/signal.7.html}{signal(7)}) \textbf{émis par un processus tueur} via 
      l'appel système \href{https://man7.org/linux/man-pages/man2/kill.2.html}{\texttt{kill(2)}} ou la commande \href{https://man7.org/linux/man-pages/man1/kill.1.html}{\texttt{kill(1)}}. Les droits d'accès s'appliquent.
   \end{itemize}
   
 \end{frame}
+\begin{frame}
+  \frametitle{Fichiers et processus}
+  \framesubtitle{attente et observation dynamique d'un processus}
+
+  Attente d'un processus: l'appel système
+  \href{https://man7.org/linux/man-pages/man2/wait.2.html}{\texttt{wait(2)}}
+  attend un fils quelconque. Et
+  \href{https://man7.org/linux/man-pages/man2/waitpid.2.html}{\texttt{waitpid(2)}}
+  attend un fils donné (ou un groupe de fils). Un shell comme \href{https://man7.org/linux/man-pages/man1/bash.1.html}{\texttt{bash(1)}} lance et attend plein de fils (un par commande lancée).
+
+
+  \vspace{0.4cm}
+  
+  Plusieurs manières d'observer un processus donné:
+
+  \begin{itemize}
+
+  \item l'appel système de bas niveau \href{https://man7.org/linux/man-pages/man2/ptrace.2.html}{\texttt{ptrace(2)}}
+ 
+    
+  \item la commande
+    \href{https://man7.org/linux/man-pages/man1/strace.1.html}{\texttt{strace(1)}}
+    liste les appels systèmes, et
+    \href{https://man7.org/linux/man-pages/man1/ltrace.1.html}{\texttt{ltrace(1)}}
+    liste les appels de fonctions de bibliothèque.
+
+    \item le débogueur 
+    \href{https://man7.org/linux/man-pages/man1/gdb.1.html}{\texttt{gdb(1)}} profite des informations de déboguage
+    
+    \item le chronomètre 
+    \href{https://man7.org/linux/man-pages/man1/time.1.html}{\texttt{time(1)}} mesure les temps passés  (voir 
+  \href{https://man7.org/linux/man-pages/man7/time.7.html}{time(7)} pour les détails)
+    
+    \item l'utilitaire 
+    \href{https://man7.org/linux/man-pages/man1/perf.1.html}{\texttt{perf(1)}} analyse les performances
+    
+  \end{itemize}
+  
+\end{frame}
+
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%a%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Local Variables: ;;
