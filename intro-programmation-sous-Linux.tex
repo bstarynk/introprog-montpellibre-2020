@@ -5,6 +5,7 @@
 \usepackage{xcolor}
 \usepackage{alltt}
 \usepackage{wasysym}
+\usepackage{verbatim}
 \usepackage{hyperref}
 \usepackage{newunicodechar}
 
@@ -705,6 +706,38 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 
 \begin{frame}
   \frametitle{Le noyau Linux}
+  \framesubtitle{La ``philosophie d'Unix''}
+
+  \href{https://en.wikipedia.org/wiki/Unix_philosophy}{Unix philosophy} (wikipedia)
+
+  \begin{relsize}{-0.6}
+The Unix philosophy, originated by Ken Thompson, is a set of cultural
+norms and philosophical approaches to minimalist, modular software
+development. It is based on the experience of leading developers of
+the Unix operating system. Early Unix developers were important in
+\textbf{bringing the concepts of modularity and reusability into software
+engineering practice}, spawning a "software tools" movement. Over time,
+the leading developers of Unix (and programs that ran on it)
+established a set of cultural norms for developing software; these
+norms became as important and influential as the technology of Unix
+itself; this has been termed the "Unix philosophy."
+
+The Unix philosophy emphasizes building simple, short, clear, modular,
+and extensible code that can be easily maintained and repurposed by
+developers other than its creators. \textbf{The Unix philosophy favors
+composability as opposed to monolithic design}.
+  \end{relsize}
+
+  \vspace{0.3cm}
+
+  \begin{relsize}{-0.5}
+   \textcolor{DarkGreen}{Accepter de mal faire quand ça marche souvent, pour faciliter le travail des collègues....}
+  \end{relsize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Le noyau Linux}
   \framesubtitle{mémoire virtuelle}
 
   Les addresses (par exemple sur 32 bits) dans les registres ne correspondent pas \textbf{directement} à la mémoire physique DRAM.
@@ -963,6 +996,68 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
         \end{alltt}
         \end{relsize}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Le noyau Linux}
+  \framesubtitle{les fichiers exécutables}
+
+  Le noyau Linux peut exécuter dans un processus avec l'appel système
+  \href{https://man7.org/linux/man-pages/man2/execve.2.html}{execve(2)} {\relsize{-1}{(re-initialisant l'espace d'adressage et les registres de ce processus)}} :
+
+  \begin{itemize}
+
+  \item un fichier de script {\relsize{-1}{(lisible et executable, débutant par
+      le \href{https://fr.wikipedia.org/wiki/Shebang}{shebang}
+    {\textcolor{brown}{\textbf{\texttt{\#!}}}}
+      )}}
+
+    \item un exécutable binaire au format 
+      \href{https://man7.org/linux/man-pages/man5/elf.5.html}{elf(5)} {\relsize{-1}{(voir wikipage \href{https://fr.wikipedia.org/wiki/Executable_and_Linkable_Format}{Executable and Linkable Format})}}
+      avec des ``octets magiques'' (\textit{magic number}): \\
+      
+  \begin{tabular}{l|p{7.5cm}}
+    \includegraphics[width=0.3\textwidth]{Elf-layout} &
+    \begin{relsize}{-1}
+  \begin{minipage}[b]{6.5cm}
+    Similitude voulue avec l'espace d'adressage :
+    \begin{itemize}
+    \item \textit{certaines sections} correspondent à des \textit{segments} de l'espace d'adressage
+    \item d'autres sections ne sont pas projetées dans la mémoire virtuelle. \\ Par exemple: \textit{informations de déboguage} au format \href{https://en.wikipedia.org/wiki/DWARF}{DWARF} ou \href{https://fr.wikipedia.org/wiki/Table_des_symboles}{table des symboles}.
+    \end{itemize}
+  \end{minipage}
+    \end{relsize}
+  \end{tabular}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Le noyau Linux}
+  \framesubtitle{Analyser ou modifier le contenu d'un fichier}
+
+  \begin{itemize}
+    
+    \item dump en octal  \href{https://man7.org/linux/man-pages/man1/od.1.html}{od(1)} ou en hexadécimal \href{https://man7.org/linux/man-pages/man1/hd.1.html}{hd(1)} 
+
+    \item lignes de tête \href{https://man7.org/linux/man-pages/man1/head.1.html}{head(1)}  ou de queue \href{https://man7.org/linux/man-pages/man1/tail.1.html}{tail(1)} 
+
+    \item concatener plusieurs fichiers \href{https://man7.org/linux/man-pages/man1/cat.1.html}{cat(1)}
+    \item recherche  \href{https://man7.org/linux/man-pages/man1/grep.1.html}{grep(1)}
+    \item édition par flots  \href{https://man7.org/linux/man-pages/man1/sed.1.html}{sed(1)}
+      
+    \item copie \href{https://man7.org/linux/man-pages/man1/cp.1.html}{cp(1)} , suppression \href{https://man7.org/linux/man-pages/man1/rm.1.html}{rm(1)}, renommage \href{https://man7.org/linux/man-pages/man1/mv.1.html}{mv(1)}
+
+    \item sur un fichier exécutable \href{https://fr.wikipedia.org/wiki/Executable_and_Linkable_Format}{ELF} :
+
+      \begin{itemize}
+      \item commande  \href{https://man7.org/linux/man-pages/man1/nm.1.html}{nm(1)} pour la table des noms (symboles)
+
+        \item  commande  \href{https://man7.org/linux/man-pages/man1/readelf.1.html}{readelf(1)} pour extraire des informations
+        \item  commande  \href{https://man7.org/linux/man-pages/man1/objdump.1.html}{objdump(1)} pour afficher des informations
+        \item  commande  \href{https://man7.org/linux/man-pages/man1/ldd.1.html}{ldd(1)} pour lister les dépendances
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+      
 
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%a%%%%%%%%%%%%%%%%%%%%%%%%%%
