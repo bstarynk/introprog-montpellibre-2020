@@ -1064,8 +1064,8 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
   \frametitle{Fichiers et processus}
   \framesubtitle{Les processus}
 
-   \textbf{\textcolor{red}{Chaque processus est un programme \textcolor{FireBrick}{-fichier exécutable-} en train de tourner}} (en cours
-  d'exécution).  {\relsize{-1}{(Méta-données descriptives décrites dans
+   \textbf{\textcolor{red}{Chaque processus est un programme \textcolor{FireBrick}{-fichier exécutable-} en train de tourner}} -en cours
+  d'exécution-.  {\relsize{-1}{(Méta-données descriptives décrites dans
   \href{https://man7.org/linux/man-pages/man7/credentials.7.html}{credentials(7)}
   et accessibles via
   \href{https://man7.org/linux/man-pages/man5/proc.5.html}{proc(5)},
@@ -1074,9 +1074,11 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
   \begin{itemize}
 
   \item commandes
-    \href{https://man7.org/linux/man-pages/man1/ps.1.html}{ps(1)} et
-    \href{https://man7.org/linux/man-pages/man1/top.1.html}{top(1)}
-    pour les lister {\relsize{-1}{(via le pseudo-système de fichiers \texttt{/proc/})}}
+    \href{https://man7.org/linux/man-pages/man1/ps.1.html}{ps(1)},
+    \href{https://man7.org/linux/man-pages/man1/pstree.1.html}{pstree(1)}
+    et \href{https://man7.org/linux/man-pages/man1/top.1.html}{top(1)}
+    pour les lister {\relsize{-1}{(via le pseudo-système de fichiers
+        \texttt{/proc/})}}
     
   \item un même exécutable (ou script) peut être exécuté par \emph{plusieurs}
     processus en parallèle {\relsize{-1}{(exécution concurrente, en particulier
@@ -1091,7 +1093,7 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
   \href{https://man7.org/linux/man-pages/man2/mprotect.2.html}{mprotect(2)}
 
     \item \textbf{chaque processus a son identifiant unique numérique} (pid, ``process id'')
-  \href{https://man7.org/linux/man-pages/man2/getpid.2.html}{getpid(2)},
+ accessible par \href{https://man7.org/linux/man-pages/man2/getpid.2.html}{getpid(2)}
     
     \item \textbf{chaque processus est créé par son processus père} {\relsize{-1}{(sauf \texttt{/sbin/init}, de pid 1, démarré automagiquement par le noyau)}} dont le pid est renvoyé par
   \href{https://man7.org/linux/man-pages/man2/getppid.2.html}{getppid(2)}. Il peut survivre à son père.
