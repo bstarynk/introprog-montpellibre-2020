@@ -1031,10 +1031,12 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
   \end{itemize}
 \end{frame}
 
+
 \begin{frame}
   \frametitle{Fichiers et processus}
   \framesubtitle{Analyser ou modifier le contenu d'un fichier}
-
+  
+  De nombreuses commandes existent. On peut en créer d'autres...
   \begin{itemize}
     
     \item dump en octal  \href{https://man7.org/linux/man-pages/man1/od.1.html}{od(1)} ou en hexadécimal \href{https://man7.org/linux/man-pages/man1/hd.1.html}{hd(1)} 
@@ -1064,13 +1066,14 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
   \frametitle{Fichiers et processus}
   \framesubtitle{Les processus}
 
-   \textbf{\textcolor{red}{Chaque processus est un programme \textcolor{FireBrick}{-fichier exécutable-} en train de tourner}} -en cours
-  d'exécution-.  {\relsize{-1}{(Méta-données descriptives décrites dans
+     \textbf{\textcolor{red}{Chaque processus est un programme \textcolor{FireBrick}{-fichier exécutable-} en train de tourner}} -en cours
+  d'exécution-.  {\relsize{-1}{Méta-données descriptives décrites dans
   \href{https://man7.org/linux/man-pages/man7/credentials.7.html}{credentials(7)}
   et accessibles via
   \href{https://man7.org/linux/man-pages/man5/proc.5.html}{proc(5)},
-  notamment \texttt{/proc/self/} pour le processus courant)}}
-  
+  notamment \texttt{/proc/self/} pour le processus courant}}
+
+  \begin{relsize}{-0.5}
   \begin{itemize}
 
   \item commandes
@@ -1090,6 +1093,7 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
   \href{https://man7.org/linux/man-pages/man2/execve.2.html}{execve(2)},
   \href{https://man7.org/linux/man-pages/man2/mmap.2.html}{mmap(2)},
   \href{https://man7.org/linux/man-pages/man2/munmap.2.html}{munmap(2)},
+  \href{https://man7.org/linux/man-pages/man2/sbrk.2.html}{sbrk(2)},
   \href{https://man7.org/linux/man-pages/man2/mprotect.2.html}{mprotect(2)}
 
     \item \textbf{chaque processus a son identifiant unique numérique} (pid, ``process id'')
@@ -1099,12 +1103,46 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
   \href{https://man7.org/linux/man-pages/man2/getppid.2.html}{getppid(2)}. Il peut survivre à son père.
     
   \end{itemize}
-
+  \end{relsize}
+  
 \end{frame}
 
+\begin{frame}
+  \frametitle{Fichiers et processus}
+  \framesubtitle{création et terminaison des processus}
+
+  \textbf{\textcolor{red}{Création d'un processus:}} par \textbf{l'appel
+  système
+  \href{https://man7.org/linux/man-pages/man2/fork.2.html}{fork(2)}},
+  qui peut échouer, et quand il réussit créer par ``clonage'' un processus fils quasi
+  identique au père, et \textbf{a \textcolor{FireBrick}{deux résultats}} : 0 dans le fils, et le pid
+  du fils dans le père.
+
+  \vspace{0.5cm}
+  \textbf{\textcolor{red}{Terminaison d'un processus:}}
+
+  \begin{itemize}
+    \item \textbf{\textcolor{FireBrick}{terminaison normale}} explicite par
+      \href{https://man7.org/linux/man-pages/man2/exit.2.html}{\texttt{\_exit(2)}} ou
+      \href{https://man7.org/linux/man-pages/man3/exit.3.html}{\texttt{exit(3)}} ou \textbf{fin normale du programme}
+
+    \item \textbf{\textcolor{FireBrick}{terminaison prématurée}} en
+      erreur par un signal (voir
+      \href{https://man7.org/linux/man-pages/man7/signal.7.html}{signal(7)})
+      forcé par \textbf{un plantage} (ou abus de resources) du
+      programme de ce processus {\relsize{-1}{(division par 0, viol de
+          l'espace d'adressage, dépassement de temps alloué,
+          débordement d'espace disque, ...)}}
+      
+    \item \textbf{\textcolor{FireBrick}{terminaison forcée}} par un signal (voir 
+  \href{https://man7.org/linux/man-pages/man7/signal.7.html}{signal(7)}) \textbf{émis par un autre processus tueur} (via 
+     l'appel système \href{https://man7.org/linux/man-pages/man2/kill.2.html}{\texttt{kill(2)}} ou la commande \href{https://man7.org/linux/man-pages/man1/kill.1.html}{\texttt{kill(1)}}. Les droits d'accès s'appliquent.
+  \end{itemize}
+  
+\end{frame}
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%a%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Local Variables: ;;
 %% compile-command: "./build.sh" ;;
 %% End: ;;
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
