@@ -95,7 +95,9 @@
      \small \tableofcontents[currentsection, hideothersubsections]
    \end{frame}
  }
- 
+
+
+ %%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \section{Introduction}
 
 \begin{frame}
@@ -341,9 +343,12 @@ AMD ThreadRipper Ryzen)
 \includegraphics[width=0.66\textwidth]{interieur-ordinateur.png}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+ %%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \section{couches logicielles}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{généralités sur le logiciel}
 
 \begin{frame}
   \frametitle{Couches logicielles}
@@ -472,9 +477,10 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 \end{frame}
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{architecture des microprocesseurs}
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{logiciel et architecture des microprocesseurs}
   \framesubtitle{Jeu d'instructions machine, registres, conventions d'appel}
 
   \textcolor{DarkGreen}{application binary interface}. Document (parfois, 800 pages)
@@ -501,7 +507,7 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 \end{frame}
 
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{logiciel et architecture des microprocesseurs}
   \framesubtitle{Exemple: PowerPC NXP 601 : broches et signaux}
 
   \includegraphics[width=0.85\textwidth]{powerpc-nxp-601}
@@ -509,7 +515,7 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 
 \end{frame}
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{logiciel et architecture des microprocesseurs}
   \framesubtitle{Exemple: PowerPC NXP 601 : microarchitecture}
 
   \includegraphics[width=0.50\textwidth]{powerpc601-microarchitecture}
@@ -518,13 +524,13 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 \end{frame}
 
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{logiciel et architecture des microprocesseurs}
   \framesubtitle{Exemple: Architecture PowerPC601 : registres complets}
   \includegraphics[width=0.6\textwidth]{powerpc-registers}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{logiciel et architecture des microprocesseurs}
   \framesubtitle{Exemple: Architecture PowerPC : registres utilisateurs}
 
   \includegraphics[width=0.85\textwidth]{powerpc-user-register}
@@ -534,7 +540,17 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 \end{frame}
 
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{logiciel et architecture des microprocesseurs}
+  \framesubtitle{Exemple: Architecture x86-64 : registres utilisateurs}
+
+  \includegraphics[width=0.75\textwidth]{x86-64-registers}
+
+
+  où \texttt{RSP} est le pointeur de pile (``stack pointer'')
+\end{frame}
+
+\begin{frame}
+  \frametitle{logiciel et architecture des microprocesseurs}
   \framesubtitle{Exemple: Architecture PowerPC : registre de conditions}
 
   \includegraphics[width=0.75\textwidth]{powerpc-condreg}
@@ -543,7 +559,7 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 \end{frame}
 
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{logiciel et architecture des microprocesseurs}
   \framesubtitle{Exemple: Architecture PowerPC : registre d'état machine (MSR)}
   \includegraphics[width=0.75\textwidth]{powerpc-machstatereg}
 
@@ -554,7 +570,7 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 \end{frame}
 
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{logiciel et architecture des microprocesseurs}
   \framesubtitle{Exemple: Architecture PowerPC : rôles des bits du registre d'état machine (MSR)}
   \includegraphics[width=0.75\textwidth]{powerpc-msr-bits}
 
@@ -562,15 +578,50 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 \end{frame}
 
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{logiciel et architecture des microprocesseurs}
+  \framesubtitle{Deux modes de fonctionnement des microprocesseurs}
+
+  \begin{itemize}
+  \item \textcolor{red}{\textbf{mode superviseur}}: toutes les
+    instructions machines sont permises, y compris les plus
+    dangereuses (entrée/sorties physiques, configuration de l'espace
+    d'addressage, modification de la fréquence ou de l'énergie
+    consommée). Pour \textbf{le code du noyau} supposé  \textcolor{red}{\textbf{fiable et correct}}.
+
+    \item \textcolor{red}{\textbf{mode utilisateur}}: les instructions
+      machines dangereuses (E/S, mémoire virtuelle, ....)  sont
+      interdites et ne sont pas executées. Pour \textbf{le code
+        applicatif} : quand il plante, le système (noyau) prend la
+      main.
+    
+  \end{itemize}
+
+
+  Les \textcolor{red}{\textbf{interruptions}} font passer du mode
+  utilisateur au mode superviseur. Elles sont \textbf{internes}
+  {\relsize{-1}{(instruction illicite en mode utilisateur, division
+      par 0, défaut de page, appel système...)}} ou \textbf{externes}
+  {\relsize{-1}{(temporisation, surchauffe, paquet Ethernet reçu, fin de lecture
+      d'un bloc du disque, ...)}}
+\end{frame}
+
+\begin{frame}
+  \frametitle{logiciel et architecture des microprocesseurs}
   \framesubtitle{Exemple: Architecture PowerPC : formats d'instructions machine}
   \includegraphics[width=0.9\textwidth]{powerpc-instr-format}
   
 
 \end{frame}
 
+
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{logiciel et architecture des microprocesseurs}
+  \framesubtitle{Exemple: Architecture PowerPC : appel système}
+  \includegraphics[width=0.60\textwidth]{powerpc-syscall-instr}
+\end{frame}
+
+\begin{frame}
+  \frametitle{logiciel et architecture des microprocesseurs}
   \framesubtitle{Exemple: Architecture PowerPC : chargement d'un registre}
   \includegraphics[width=0.9\textwidth]{powerpc-load-instr}
   
@@ -578,7 +629,7 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 \end{frame}
 
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{logiciel et architecture des microprocesseurs}
   \framesubtitle{Exemple: Architecture PowerPC : écriture d'un registre}
   \includegraphics[width=0.9\textwidth]{powerpc-store-instr}
   
@@ -587,25 +638,57 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 
 
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{logiciel et architecture des microprocesseurs}
   \framesubtitle{Exemple: Architecture PowerPC : multiplication}
   \includegraphics[width=0.9\textwidth]{powerpc-mult-instr}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{logiciel et architecture des microprocesseurs}
   \framesubtitle{Exemple: Architecture PowerPC : comparaison}
   \includegraphics[width=0.9\textwidth]{powerpc-compare-instr}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{logiciel et architecture des microprocesseurs}
   \framesubtitle{Exemple: Architecture PowerPC : branchement}
   \includegraphics[width=0.7\textwidth]{powerpc-branch-instr}
 \end{frame}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{rôles et traits du noyau Linux}
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{Le noyau Linux}
+  \framesubtitle{abstraction et services fournis par le noyau Linux aux applications}
+
+  
+  \begin{itemize}
+
+  \item Linux est \textcolor{red}{\textbf{multi-tâches}}, \textcolor{red}{\textbf{multi-utilisateurs}}
+
+  \item les \textbf{fichiers} et \textbf{répertoires}
+
+  \item les \textbf{processus}  {\relsize{-1}{(un programme en train de tourner)}} et les threads (filaments) - leur  \textcolor{red}{\textbf{isolation}}
+
+  \item l'\textbf{exécution d'un fichier exécutable}
+
+    \item la \textbf{mémoire virtuelle}
+    
+  \item la \textbf{communication entre processus}
+
+  \item la \textbf{gestion des périphériques} {\relsize{-1}{(écran, clavier, souris, clef USB, disque, ....)}}
+
+  \item le \textbf{réseau} {\relsize{-1}{(Internet)}} et la \textbf{communication entre ordinateurs} {\relsize{-1}{(Ethernet, Wifi, ....)}}
+
+  \end{itemize}
+
+   \textcolor{red}{\textbf{Le noyau Linux fournit les appels systèmes}} listés en \href{https://man7.org/linux/man-pages/man2/syscalls.2.html}{syscalls(2)}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Le noyau Linux}
   \framesubtitle{mémoire virtuelle}
 
   Les addresses (par exemple sur 32 bits) dans les registres ne correspondent pas \textbf{directement} à la mémoire physique DRAM.
@@ -618,7 +701,7 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
       \begin{itemize}
       \item l'\textbf{espace d'adressage} d'un processus est géré par \textbf{pages} de 4Ko
       \item une page pourrait être (pour son processus): \begin{enumerate}
-      \item interdite d'accès
+      \item interdite d'accès (en bleu)
       \item partagée avec d'autres processus
       \item projetée (en lecture, en écriture) sur un bout de fichier
       \item avec/sans du code machine exécutable 
@@ -631,7 +714,7 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 \end{frame}
 
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{Le noyau Linux}
   \framesubtitle{pagination de la mémoire virtuelle}
 
   Commande Linux
@@ -660,11 +743,11 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
 \end{frame}
 
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{Le noyau Linux}
   \framesubtitle{systèmes de fichiers - abstraction}
 
 
-  Les fichiers et répertoires ``n'existent pas'' et sont une abstraction fournie par le noyau du système d'exploitation. \textbf{\textcolor{red}{Les fichiers sont des séquences d'octets}} (souvent une dizaine, parfois des milliards).
+  Les fichiers et répertoires ``n'existent pas'' et sont  \textbf{\textcolor{red}{une abstraction}} fournie par le noyau du système d'exploitation. \textbf{\textcolor{red}{Les fichiers sont des séquences d'octets}} {\relsize{-1}{(souvent une dizaine, parfois des milliards)}} \textbf{\textcolor{red}{avec des méta-données}}.
 
   Conventions de nommage et d'accès (simplifiées)
 
@@ -680,22 +763,22 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
       configure le gestionnaire de fenêtres graphiques
       \href{https://fr.wikipedia.org/wiki/X.Org}{X.Org}.
       \item \texttt{/home/} : contient les répertoires domestiques (``home directory'') de chaque utilisateur. Par exemple \texttt{/home/basile/}
-      \item \texttt{/dev/} : contient les pseudo-fichiers correspondant aux périphériques (``device'', par exemple \texttt{/dev/cdrom}).
+      \item \texttt{/dev/} : contient les pseudo-fichiers correspondant aux périphériques {\relsize{-1}{(``device'', par exemple \texttt{/dev/cdrom} ou \texttt{/dev/zero}  ou   \texttt{/dev/random})}}.
   \end{itemize}
-    \item les \textbf{répertoires}, les  \textbf{liens symboliques} sont des fichiers
+    \item les \textbf{répertoires}, les  \textbf{liens symboliques} sont des fichiers.
   \end{itemize}
 
 \end{frame}
   
 \begin{frame}
-  \frametitle{Couches logicielles}
+  \frametitle{Le noyau Linux}
   \framesubtitle{systèmes de fichiers - conseils de nommage}
 
   Voir \href{https://man7.org/linux/man-pages/man7/path_resolution.7.html}{\texttt{path\_resolution(7)}} pour ``comment ça marche''
   
   \begin{itemize}
-  \item éviter les caractères bizarres, par exemple espace ou tabulation
-  \item commencer et terminer un nom de fichier par une lettre ou chiffre ou blanc-souligné {\texttt{\_}}
+  \item \textcolor{FireBrick}{éviter les caractères bizarres}, par exemple espace ou tabulation
+  \item \textcolor{DarkGreen}{commencer et terminer un nom de fichier par une lettre ou chiffre ou blanc-souligné {\texttt{\_}}}
   \item les fichiers dont le nom commencent par un point \texttt{.} sont ``cachés''
   \item les chemins \texttt{.} et \texttt{..} désignent le répertoire courant ou parent
     \item l'extension (après un point) désigne par convention le type de contenu: \texttt{.html} pour du web, \texttt{.pdf} pour un document PDF, \texttt{.c} pour du code C, \texttt{.s} pour du code assembleur, \texttt{.so} pour une bibliothèque partagée ou un greffon (voir \href{https://man7.org/linux/man-pages/man3/dlopen.3.html}{dlopen(3)}), \textbf{etc...}
@@ -707,13 +790,6 @@ cinq ans d'emprisonnement et à 150 000 € d'amende.
   \textbf{\textcolor{red}{importance de suivre les conventions}}
 \end{frame}
 
-
-
-\begin{frame}
-  \frametitle{Couches logicielles}
-  \framesubtitle{Exemple: Architecture PowerPC : appel système}
-  \includegraphics[width=0.60\textwidth]{powerpc-syscall-instr}
-\end{frame}
 
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%a%%%%%%%%%%%%%%%%%%%%%%%%%%%
