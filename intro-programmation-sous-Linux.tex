@@ -887,15 +887,15 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
 
   \begin{itemize}
 
-  \item un propriétaire ou utilisateur (désigné par un numéro)
+  \item \textbf{\textcolor{red}{un propriétaire}} ou utilisateur (désigné par un numéro, ``owner user id'')
 
-  \item un groupe (désigné par un numéro)
+  \item \textbf{\textcolor{red}{un groupe}} (désigné par un numéro, ``group id'')
 
-  \item des droits d'accès pour le propriétaire, le groupe, les autres
+  \item \textbf{\textcolor{red}{des droits d'accès}} pour le propriétaire, le groupe, les autres
 
   \end{itemize}
 
-  L'utilisateur 0 est spécial: \textbf{\textcolor{red}{root}} et ``peut tout faire''
+  L'utilisateur 0 est spécial: \textbf{\textcolor{brown}{root}} et ``peut tout faire''
 
 \vspace{0.5cm}
 
@@ -920,8 +920,9 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
   \frametitle{Le noyau Linux}
   \framesubtitle{méta-données des fichiers}
 
-  Voir \href{https://man7.org/linux/man-pages/man7/inode.7.html}{inode(7)} pour les détails, et \href{https://man7.org/linux/man-pages/man2/stat.2.html}{stat(2)} pour les interroger.
+  Voir \href{https://man7.org/linux/man-pages/man7/inode.7.html}{inode(7)} pour les détails, et \href{https://man7.org/linux/man-pages/man2/stat.2.html}{stat(2)} pour les interroger programmatiquement.
 
+  \begin{relsize}{-0.5}
   \begin{itemize}
   \item taille du fichier (en octets) et taille occupée en blocs
     \item en option date de création {\relsize{-1}{(en secondes par rapport à l'\href{https://fr.wikipedia.org/wiki/Epoch}{Epoch}, début de l'année 1970)}}
@@ -931,26 +932,36 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
     \item type de fichier (ordinaire, lien symbolique, FIFO, répertoire, etc...)
     \item compteur de liens (ou de noms)
     \item utilisateur propriétaire (user id) et groupe propriétaire (group id)
-    \item droit d'accès (\texttt{rwx}) lecture, écriture, execution pour l'utilisateur
-    \item droit d'accès (\texttt{rwx}) lecture, écriture, execution pour le groupe
-    \item droit d'accès (\texttt{rwx}) lecture, écriture, execution pour les autres
+    \item droit d'accès (\texttt{rwx}) lecture, écriture, exécution pour l'utilisateur
+    \item droit d'accès (\texttt{rwx}) lecture, écriture, exécution pour le groupe
+    \item droit d'accès (\texttt{rwx}) lecture, écriture, exécution pour les autres
   \end{itemize}
+  \end{relsize}
+\end{frame}
 
-%-        Exemple avec la commande
-%-        \href{https://man7.org/linux/man-pages/man2/stat.1.html}{stat(1)} :
-%-        \texttt{stat intro-programmation-sous-Linux.tex} produit :
-%-
-%-        \begin{verbatim}
-%-          Fichier : intro-programmation-sous-Linux.tex
-%-         Taille : 33520     	Blocs : 72         Blocs d'E/S : 4096   fichier
-%-      Périphérique: 802h/2050d	Inœud: 918078      Liens: 1
-%-      Accès: (0644/-rw-r--r--)  UID: (12752/basilest)   GID: ( 4200/basilegr)
-%-      Accès: 2020-08-02 12:40:26.275083457 +0200
-%-      Modif.: 2020-08-02 12:40:20.153093527 +0200
-%-      Changt: 2020-08-02 12:40:20.153093527 +0200
-%-        Créé: -
-%-        \end{verbatim}
+\begin{frame}
+  \frametitle{Le noyau Linux}
+  \framesubtitle{exemple de méta-données d'un fichier}
   
+        Exemple avec la commande
+        \href{https://man7.org/linux/man-pages/man2/stat.1.html}{stat(1)}
+        utilisant
+        \href{https://man7.org/linux/man-pages/man2/stat.2.html}{stat(2)}
+        : \\ \texttt{stat intro-programmation-sous-Linux.tex} produit
+        :
+
+        \begin{relsize}{-0.5}
+        \begin{alltt}
+          Fichier : intro-programmation-sous-Linux.tex\\
+         Taille : 33520     	Blocs : 72         Blocs d'E/S : 4096   fichier \\
+      Périphérique: 802h/2050d	Inœud: 918078      Liens: 1\\
+      Accès: (0644/-rw-r--r--)  UID: (12752/basilest)   GID: ( 4200/basilegr)\\
+      Accès: 2020-08-02 12:40:26.275083457 +0200\\
+      Modif.: 2020-08-02 12:40:20.153093527 +0200\\
+      Changt: 2020-08-02 12:40:20.153093527 +0200\\
+        Créé: -
+        \end{alltt}
+        \end{relsize}
 \end{frame}
 
 \end{document}
