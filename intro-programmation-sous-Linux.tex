@@ -1179,11 +1179,71 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
   \end{itemize}
   
 \end{frame}
+
 \begin{frame}
   \frametitle{Fichiers et processus}
   \framesubtitle{table de descripteurs de fichiers}
 
-  @@@@
+  \textbf{Chaque processus Linux a sa propre}
+  \textbf{\textcolor{red}{table de descripteurs de fichiers}} ouverts
+    (``open file descriptor table'', moins d'une dizaine à des
+    milliers d'entrées), voir
+    \href{https://man7.org/linux/man-pages/man3/stdio.3.html}{stdio(3)}. Conventionnellement
+    souvent au moins:
+
+  \begin{itemize}
+    \item[\texttt{0}]  \textbf{entrée standard} \texttt{STDIN\_FILENO}, en C le canal \texttt{stdin}
+    \item[\texttt{1}]   \textbf{sortie standard} \texttt{STDOUT\_FILENO}, en C le canal \texttt{stdout}
+    \item[\texttt{2}]   \textbf{message d'erreurs standard} \texttt{STDERR\_FILENO}, en C le canal \texttt{stderr}
+  \end{itemize}
+
+  \vspace{0.3cm}
+
+  Certains processus Linux (notamment les logiciels serveurs Web)
+  peuvent avoir des dizaines de milliers de descripteurs de fichiers
+  (une par connection TCP/IP). On peut en limiter le nombre par
+  \href{https://man7.org/linux/man-pages/man2/setrlimit.2.html}{setrlimit(2)}
+  et ces limites sont héritées par le processus fils créé par
+  \href{https://man7.org/linux/man-pages/man2/fork.2.html}{fork(2)}. Utiliser
+  \texttt{/proc/self/fd/} pour consulter cette table comme un
+  pseudo-répertoire.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fichiers et processus}
+  \framesubtitle{modification de la table de descripteurs de fichiers}
+
+
+  
+  Les appels systèmes suivants modifient cette table (copiée par
+  \href{https://man7.org/linux/man-pages/man2/fork.2.html}{fork(2)}) :
+
+  \begin{itemize}
+    \item 
+  \href{https://man7.org/linux/man-pages/man2/open.2.html}{open(2)} pour \textbf{ouvrir un fichier} existant, donné par son chemin (absolu, par exemple \texttt{/etc/fstab} ou relatif comme \texttt{../rps\_manifest.json} ou \texttt{doc/garbage-collection.md}) et 
+  \href{https://man7.org/linux/man-pages/man2/creat.2.html}{creat(2)} pour  \textbf{créer un nouveau fichier}
+
+  \item 
+  \href{https://man7.org/linux/man-pages/man2/close.2.html}{close(2)} pour  \textbf{fermer un descripteur de fichiers}
+
+\item
+  \href{https://man7.org/linux/man-pages/man2/dup2.2.html}{dup2(2)}
+  pour  \textbf{dupliquer un descripteur} de fichiers
+
+\item 
+  \href{https://man7.org/linux/man-pages/man2/pipe.2.html}{pipe(2)}
+  pour  \textbf{créer les deux bouts d'un tube de communication} (cf
+  \href{https://man7.org/linux/man-pages/man7/pipe.7.html}{pipe(7)})
+  
+    \item 
+  \href{https://man7.org/linux/man-pages/man2/socket.2.html}{socket(2)},
+  \href{https://man7.org/linux/man-pages/man2/accept.2.html}{accept(2)},
+  \href{https://man7.org/linux/man-pages/man2/accept.2.html}{connect(2)} pour  \textbf{les connections réseau} (par exemple en
+  \href{https://man7.org/linux/man-pages/man7/tcp.7.html}{tcp(7)})
+    \item \textbf{\textcolor{red}{etc...}}
+  \end{itemize}
+
+    
 \end{frame}
 
 \begin{frame}
@@ -1266,6 +1326,16 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
   \end{relsize}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Outils des développeurs Linux}
+  \framesubtitle{\texttt{emacs} sur du code source C++ de \href{http://refpersys.org/}{\texttt{refpersys.org}}}
+
+  \vspace{0.1cm}
+  
+    \includegraphics[width=0.66\textwidth]{emacs-refpersys} 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Langages des développeurs Linux}
   \framesubtitle{problème posé}
