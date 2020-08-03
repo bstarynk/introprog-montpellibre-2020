@@ -1265,6 +1265,38 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
 
 \begin{frame}
   \frametitle{Fichiers et processus}
+  \framesubtitle{chemins relatif et absolu d'un fichier pour un processus}
+
+  Voir \href{https://man7.org/linux/man-pages/man7/path_resolution.7.html}{path\_resolution(7)}
+
+  \vspace{0.3cm}
+  
+  Si un chemin ou \textbf{nom de fichier commence par} \textcolor{FireBrick}{\large\texttt{/}}, il est \textbf{absolu}
+
+  \vspace{0.3cm}
+  
+  Autrement il est \textbf{relatif au répertoire courant}
+
+  \vspace{0.3cm}
+  
+  Dans un chemin, les \textbf{répertoires sont séparés} par  \textcolor{FireBrick}{\large\texttt{/}}
+
+  \vspace{0.3cm}
+  
+  Le \textbf{répertoire parent} (parent directory) est  \textcolor{FireBrick}{\large\texttt{..}} et le \textbf{répertoire courant} est  \textcolor{FireBrick}{\large\texttt{.}}
+
+  \vspace{0.3cm}
+  Donc \texttt{/home/../tmp/foo} est compris comme \texttt{/tmp/foo}
+  \vspace{0.6cm}
+  
+  Voir fonction \href{https://man7.org/linux/man-pages/man3/realpath.3.html}{realpath(3)}
+et commande   \href{https://man7.org/linux/man-pages/man1/realpath.1.html}{realpath(1)}
+  
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Fichiers et processus}
   \framesubtitle{contexte d'exécution d'un processus: répertoire courant, etc...}
 
   Voir
