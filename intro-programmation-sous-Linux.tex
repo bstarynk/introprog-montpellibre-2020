@@ -1303,14 +1303,14 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
    \href{https://man7.org/linux/man-pages/man2/execve.2.html}{execve(2)} prend comme arguments:
 
    \begin{itemize}
-   \item le chemin du fichier exécutable (ELF ou script) à exécuter 
+   \item le chemin du fichier exécutable {\relsize{-1}{(ELF ou script)}} à exécuter  \fbox{\textcolor{FireBrick}{\texttt{/bin/ls}}}
 
    \item le tableau des arguments (chaînes de caractères comme
      \fbox{\textcolor{FireBrick}{\texttt{ls}}}
       \fbox{\textcolor{FireBrick}{\texttt{-l}}}
       \fbox{\textcolor{FireBrick}{\texttt{mon-fichier.c}}} par exemple)
      
-   \item l'environnement (par exemple chaînes de caractères comme
+   \item l'environnement (tableau de chaînes de caractères comme
      \fbox{\textcolor{FireBrick}{\texttt{HOME=/home/basile}}} 
       \fbox{\textcolor{FireBrick}{\texttt{PATH=.:/bin:/usr/bin}}}...)
      
@@ -1332,10 +1332,14 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
   \frametitle{Fichiers et processus}
   \framesubtitle{mon environnement comme exemple}
 
-La commande \href{https://man7.org/linux/man-pages/man1/printenv.1.html}{printenv(1)} me donne:
+La commande \href{https://man7.org/linux/man-pages/man1/printenv.1.html}{printenv(1)} me donne \relsize{-1}{(extrait \textit{incomplet}...)} :
 
-\begin{relsize}{-1.5}
+\begin{relsize}{-1.8}
   \begin{alltt}
+   SSH\_AUTH\_SOCK=/tmp/ssh-AokrAslPJO7B/agent.3033\\
+   USER=basilest\\
+   HOME=/home/basilest\\
+   PWD=/home/basilest/introprog-montpellibre-2020\\
    LANGUAGE=fr\_FR:en\\
    LANG=fr\_FR.UTF-8\\
    LC\_IDENTIFICATION=fr\_FR.UTF-8\\
@@ -1353,7 +1357,7 @@ La commande \href{https://man7.org/linux/man-pages/man1/printenv.1.html}{printen
   LC\_NAME=fr\_FR.UTF-8\\
   DISPLAY=:0.0\\
   LC\_ADDRESS=fr\_FR.UTF-8\\
-%  PS1=\%m \%3~ \%T \%# 
+  PS1=\%m \%3\~ ~ \%T \%\# 
   \end{alltt}
 \end{relsize}
 \end{frame}
