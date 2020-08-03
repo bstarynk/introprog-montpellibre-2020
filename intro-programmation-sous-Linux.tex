@@ -1245,13 +1245,119 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
 
     
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  {\Large deuxième jour}
+
+  \vspace{0.5cm}
+  \textcolor{red}{\Large *********************}
+  
+  \vspace{0.5cm}
+  
+   \tableofcontents
+\end{frame}
+
+%%================================================================
+%%================================================================
+
 
 \begin{frame}
   \frametitle{Fichiers et processus}
-  \framesubtitle{contexte d'exécution d'un processus: répertoire courant, arguments et environment}
+  \framesubtitle{contexte d'exécution d'un processus: répertoire courant, etc...}
 
-  @@@@
+  Voir
+  \href{https://man7.org/linux/man-pages/man7/credentials.7.html}{credentials(7)},
+  \href{https://man7.org/linux/man-pages/man7/namespaces.7.html}{namespaces(7)},
+  \href{https://man7.org/linux/man-pages/man7/capabilities.7.html}{capabilities(7)}
+  \href{https://man7.org/linux/man-pages/man7/pid\_namespaces.7.html}{pid\_namespaces(7)}
+
+   \textbf{\textcolor{red}{Chaque processus a}} (cf  \href{https://man7.org/linux/man-pages/man2/fork.2.html}{fork(2)}):
+
+  \begin{itemize}
+  \item  \textbf{\textcolor{red}{son répertoire courant}} (current working directory)  (cf  \href{https://man7.org/linux/man-pages/man2/getcwd.2.html}{getcwd(2)} et \href{https://man7.org/linux/man-pages/man2/chdir.2.html}{chdir(2)} pour le changer)
+
+  \item  \textbf{\textcolor{red}{son espace d'adressage}} dont la pile d'appel et l'environnement
+    
+  \item  \textbf{\textcolor{red}{sa table de descripteur de fichiers}}
+
+    \item  \textbf{\textcolor{red}{etc...}} (par exemple, traitement des signaux, limites de resources, son répertoire racine \href{https://man7.org/linux/man-pages/man2/chroot.2.html}{chroot(2)})
+    
+  \end{itemize}
+  
 \end{frame}
+
+\begin{frame}
+  \frametitle{Fichiers et processus}
+  \framesubtitle{démarrage d'un programme dans un processus par \texttt{execve}}
+
+   \textbf{\textcolor{red}{le \textit{seul} moyen de démarrer un programme}}
+   Linux, c'est l'appel système
+   \href{https://man7.org/linux/man-pages/man2/execve.2.html}{\textbf{execve(2)}}
+   qui ``initialise'' le processus courant pour un nouveau programme,
+   ou les fonctions qui l'utilisent:
+   \href{https://man7.org/linux/man-pages/man3/exec.3.html}{exec(3)}
+
+   Cet 
+   \href{https://man7.org/linux/man-pages/man2/execve.2.html}{execve(2)} prend comme arguments:
+
+   \begin{itemize}
+   \item le chemin du fichier exécutable (ELF ou script) à exécuter 
+
+   \item le tableau des arguments (chaînes de caractères comme
+     \fbox{\textcolor{FireBrick}{\texttt{ls}}}
+      \fbox{\textcolor{FireBrick}{\texttt{-l}}}
+      \fbox{\textcolor{FireBrick}{\texttt{mon-fichier.c}}} par exemple)
+     
+   \item l'environnement (par exemple chaînes de caractères comme
+     \fbox{\textcolor{FireBrick}{\texttt{HOME=/home/basile}}} 
+      \fbox{\textcolor{FireBrick}{\texttt{PATH=.:/bin:/usr/bin}}}...)
+     
+   \end{itemize}
+
+   \begin{relsize}{-1}
+   Le tableau d'arguments est connu du \texttt{main} du nouveau programme
+   exécuté. L'environnement aussi (voir
+   \href{https://man7.org/linux/man-pages/man7/environ.7.html}{environ(7)}
+   et
+   \href{https://man7.org/linux/man-pages/man3/getenv.3.html}{getenv(3)}, etc...). Les arguments et les environnements sont dans la pile d'appel du nouvel espace d'addressage.
+   \end{relsize}
+
+   Donc  \textbf{\href{https://man7.org/linux/man-pages/man2/execve.2.html}{execve(2)} est coûteux} (milliseconde parfois).
+   
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fichiers et processus}
+  \framesubtitle{mon environnement comme exemple}
+
+La commande \href{https://man7.org/linux/man-pages/man1/printenv.1.html}{printenv(1)} me donne:
+
+\begin{relsize}{-1.5}
+  \begin{alltt}
+   LANGUAGE=fr\_FR:en\\
+   LANG=fr\_FR.UTF-8\\
+   LC\_IDENTIFICATION=fr\_FR.UTF-8\\
+   COLORTERM=truecolor\\
+  TERM=xterm-256color\\
+  LC\_NUMERIC=fr\_FR.UTF-8\\
+  LC\_MEASUREMENT=fr\_FR.UTF-8\\
+  LC\_TIME=fr\_FR.UTF-8\\
+  LC\_PAPER=fr\_FR.UTF-8\\
+  PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin\\
+  LC\_MONETARY=fr\_FR.UTF-8\\
+  SHELL=/bin/zsh\\
+  LC\_TELEPHONE=fr\_FR.UTF-8\\
+  XAUTHORITY=/home/basilest/.Xauthority\\
+  LC\_NAME=fr\_FR.UTF-8\\
+  DISPLAY=:0.0\\
+  LC\_ADDRESS=fr\_FR.UTF-8\\
+%  PS1=\%m \%3~ \%T \%# 
+  \end{alltt}
+\end{relsize}
+\end{frame}
+
 
 \begin{frame}
   \frametitle{Fichiers et processus}
