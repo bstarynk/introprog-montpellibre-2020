@@ -1525,6 +1525,50 @@ La commande \href{https://man7.org/linux/man-pages/man1/printenv.1.html}{printen
 \end{frame}
 
 
+
+\begin{frame}
+  \frametitle{Fichiers et processus}
+  \framesubtitle{le langage de commande ``Unix shell''}
+
+  \begin{relsize}{-1}
+  \begin{itemize}
+
+  \item c'est \textbf{\textcolor{red}{un langage standardisé}} par \href{https://fr.wikipedia.org/wiki/POSIX}{POSIX} (portable operating system interface)
+    
+  \item il y a plusieurs interprètes de commandes en logiciel libre: \href{https://www.gnu.org/software/bash/}{GNU \texttt{bash}} ou \href{https://zsh.org/}{\texttt{\textbf{zsh}}} ou \href{https://wryun.github.io/es-shell/}{es} ou \href{https://en.wikipedia.org/wiki/Stand-alone_shell}{\texttt{sash}} et il faut  \textbf{\textcolor{red}{lire leur documentation}} 
+
+  \item variables indiquées par un signe \texttt{\$}, exemple \texttt{echo \${PATH}}
+
+  \item répertoire domestique de l'utilisateur noté ~ \texttt{\~}
+
+
+  \item changement de répertoire courant par  \texttt{cd} (qui ne peut pas être un programme) par exemple ~ \texttt{cd ~ \~\!/introprog-montpellibre-2020}
+
+
+  \item le shell remplace par expansion (voir \href{https://man7.org/linux/man-pages/man7/glob.7.html}{glob(7)} ...) un mot par plusieurs, selon les fichiers existants. Par exemple:
+
+     \begin{itemize}
+     \item \texttt{ls a*.c} liste tous les nom de fichiers commençant par \texttt{a} et se terminant par \texttt{.c}
+
+     \item \texttt{rm [a-h]*.o} supprime (par l'appel système
+       \href{https://man7.org/linux/man-pages/man2/unlink.2.html}{unlink(2)})
+       tous les fichiers (conventionnellement des
+       \href{https://fr.wikipedia.org/wiki/Fichier_objet}{fichiers
+         objets}) dont un nom commence par une lettre \texttt{a},
+       \texttt{b}, .... \texttt{h} et se terminant par \texttt{.o}
+     \end{itemize}
+
+   \item la commande \href{https://man7.org/linux/man-pages/man1/echo.1.html}{echo(1)} affiche ses arguments
+     
+   \item la commande \href{https://man7.org/linux/man-pages/man1/file.1.html}{file(1)} analyse le contenu d'un fichier
+     
+  \end{itemize}
+
+\end{relsize}
+
+\end{frame}
+    
+
  %%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \section{Outils et langages des développeurs Linux}
 
