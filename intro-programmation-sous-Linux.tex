@@ -44,9 +44,9 @@
 
 \title{\textsc{Introduction à la Programmation} \\
 (sous Linux)}
-\author[B.Starynkevitch]{Basile \textsc{Starynkévitch} - \href{http://starynkevitch.net/Basile/}{\texttt{starynkevitch.net/Basile}}\\ \href{mailto:basile@starynkevitch.net}{\color{blue}{\texttt{basile@starynkevitch.net}}}
+\author[B.Starynkevitch]{Basile \textsc{Starynkévitch} - \href{http://starynkevitch.net/Basile/}{\texttt{starynkevitch.net/Basile}}\\ \href{mailto:basile@starynkevitch.net}{\color{blue}{\texttt{basile@starynkevitch.net}} ~ mobile: +33 6 8501 2359}
 } %
-\institute{MontPellibre (Montpellier)}
+\institute{MontPelibre (Montpellier)}
 \date{été 2020}
 
 \begin{document}
@@ -364,7 +364,7 @@ AMD ThreadRipper Ryzen)
 
 
  %%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-\section{couches logicielles}
+\section{Couches logicielles}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{généralités sur le logiciel}
@@ -1652,7 +1652,7 @@ La commande \href{https://man7.org/linux/man-pages/man1/printenv.1.html}{printen
   La factorielle compte le nombre de chemins circulaires entre
   villes. Pour cinq villes (Annecy, Berlin, Casablanca, Dijon,
   Erlangen) il y a $5! = 120$ circuits possibles. Pour treize villes,
-  il y a $13! = 6 227 020 800$ (plus de six milliards)
+  il y en a $13! = 6 227 020 800$ (plus de six milliards)
 
   \vspace{0.5cm}
   
@@ -1666,34 +1666,214 @@ La commande \href{https://man7.org/linux/man-pages/man1/printenv.1.html}{printen
 
 \begin{frame}
   \frametitle{Langages des développeurs Linux}
+  \framesubtitle{coloriage de la factorielle}
+
+  Le code source contient (dans les exemples ci-dessous) :
+
+  \begin{itemize}
+
+  \item des \textbf{mots-clés} du langage de programmation, en
+    \textcolor{red}{rouge pour les mots-clés}.\\ {\small (certains
+      langages de programmation -PL/1 ou Common Lisp- n'ont
+      théoriquement pas de mots-clés \textit{réservés}, mais
+      pragmatiquement ils en ont)}
+
+  \item des \textbf{commentaires} pour les dévelopeurs humains, en
+    \textcolor{green}{vert pour les commentaires}
+
+  \item des \textbf{définitions} de nouveaux noms, en ~ \textcolor{Olive}{vert olive pour les noms nouvellement définis}
+
+  \item les \textbf{litéraux} (chaînes, nombres) pourraient mériter
+    une couleur (``syntax coloring'')
+    
+  \end{itemize}
+
+  \vspace{0.5cm}
+  
+En 2020, \textbf{un bon éditeur de code source va coloriser votre code}.
+  
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
   \framesubtitle{factorielle en Ocaml}
 
-  En langage \href{https://ocaml.org/}{Ocaml}:
+  En langage \href{https://ocaml.org/}{Ocaml}, peut-être dans un fichier \texttt{fact.ml} ~ :
 
   \begin{alltt}
-    \textcolor{green}{(*factorielle en Ocaml, récursivement*)}
+    \textcolor{green}{(*fonction factorielle en Ocaml, récursivement*)}
 
-    \textcolor{red}{\textbf{let rec}} fact n = \\
+    \textcolor{red}{\textbf{let rec}}  \textcolor{Olive}{fact} n = \\
     \hspace{1cm} \textcolor{red}{\textbf{if}} n > 1  \textcolor{red}{\textbf{then}} n * fact (n - 1) \\
     \hspace{1cm} \textcolor{red}{\textbf{else}} 1 \\
      \textcolor{blue}{\textbf{;;}} 
   \end{alltt}
 
-  itérativement avec recursion terminale
+  variante codée itérativement avec un ou deux sites d'appel de fonction en récursion
+  terminale en \textcolor{Brown}{brun}:
   
   \begin{alltt}
-    \textcolor{green}{(*factorielle en Ocaml, iterativement*)}
+    \textcolor{green}{(*factorielle en Ocaml, itérativement*)}
 
-    \textcolor{red}{\textbf{let}} fact n = \\
-    \hspace{1cm} \textcolor{red}{\textbf{let rec}} factloop n p = \\
+    \textcolor{red}{\textbf{let}}  \textcolor{Olive}{fact} n = \\
+    \hspace{1cm} \textcolor{red}{\textbf{let rec}}  \textcolor{Olive}{factloop} n p = \\
     \hspace{1.5cm} \textcolor{red}{\textbf{if}} n > 0  \\
-    \hspace{1.5cm} \textcolor{red}{\textbf{then}} factloop (n-1) (n * p) \\
+    \hspace{1.5cm} \textcolor{red}{\textbf{then}} \textcolor{Brown}{factloop (n - 1) (n * p)} \\
     \hspace{1.5cm} \textcolor{red}{\textbf{else}} p \\    
-    \hspace{1cm} \textcolor{red}{\textbf{in}} factloop n 1\\
+    \hspace{1cm} \textcolor{red}{\textbf{in}} \textcolor{Brown}{factloop n 1}\\
      \textcolor{blue}{\textbf{;;}} 
   \end{alltt}
   
 \end{frame}
+
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
+  \framesubtitle{factorielle en \textit{C} - récursivement}
+
+  \begin{relsize}{-0.5}
+En langage \href{https://fr.wikipedia.org/wiki/C_(langage)}{C}, voir
+le livre \href{https://modernc.gforge.inria.fr/}{\textit{Modern C}},
+des cours comme
+\href{https://openclassrooms.com/fr/courses/19980-apprenez-a-programmer-en-c}{\textit{Apprenez
+    à programmer en C}}, des sites tels que
+\href{https://en.cppreference.com/w/}{\texttt{cppreference.com}} (pour
+C et C++), le standard \textit{C11} en
+\href{http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf}{n1570}
+(sur 700 pages); dans un fichier source \texttt{fact.c} ~ :
+  \end{relsize}
+
+  \vspace{0.3cm}
+  
+ Forme récursive:
+  \begin{alltt}
+    \textcolor{green}{/*fonction factorielle en C*/}\\
+    \textcolor{red}{\textbf{extern}} long \textcolor{Olive}{fact}(int);  \textcolor{green}{//déclaration}\\
+    \textcolor{green}{//variante récursive}\\
+    long fact(int n) \{\\    
+    ~ \textcolor{green}{//retour avec expression conditionnelle}\\
+    \hspace{0.5cm}  \textcolor{red}{\textbf{return}} \\
+    \hspace{1cm} (n > 1) ?\\
+    \hspace{1cm} n*fact(n-1) :\\
+    \hspace{1cm} 1;\\
+    \}
+  \end{alltt}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
+  \framesubtitle{factorielle en \textit{C} - boucle itérative}
+
+  \begin{relsize}{-1}
+  \begin{alltt}
+    \textcolor{green}{/*fonction factorielle en C*/}\\
+    \textcolor{red}{\textbf{extern}} long \textcolor{Olive}{fact}(int);  \textcolor{green}{//déclaration}\\
+    \textcolor{green}{//variante itérative en boucle}\\
+    long fact(int  \textcolor{Olive}{n}) \{\\
+    \hspace{0.5cm}long \textcolor{Olive}{res} = 1;\\
+    \hspace{0.5cm}\textcolor{red}{\textbf{while}} (n > 0) \{\\
+    \hspace{1cm}res = res * n;\\
+    \hspace{1cm}n = n - 1;\\
+    \hspace{0.5cm}\};\\
+    \hspace{0.5cm}\textcolor{red}{\textbf{return}} res;\\
+    \}
+  \end{alltt}
+  \end{relsize}
+  
+  Notez les instructions d'\textbf{affectation} (``assignment statements'',
+  car mathématiquement $n = n -1$ est impossible) qui décrémente le
+  compteur \texttt{n}. On pourrait écrire \texttt{n--;} au lieu de \texttt{n = n-1;} (et si besoin \texttt{p++;} au lieu de \texttt{p=p+1;})
+\end{frame}
+
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
+  \framesubtitle{factorielle en \textit{C} - itération avec saut (années 1980)}
+
+  \begin{alltt}
+    \textcolor{green}{/*fonction factorielle en C*/}\\
+    \textcolor{red}{\textbf{extern}} long \textcolor{Olive}{fact}(int);  \textcolor{green}{//déclaration}\\
+    \textcolor{green}{//variante itérative avec saut}\\
+    long fact(int \textcolor{Olive}{n}) \{\\
+    \hspace{0.5cm}long \textcolor{Olive}{res} = 1;\\
+    \hspace{0.3cm}\textcolor{Olive}{etiq:}\\
+    \hspace{0.5cm}\textcolor{red}{\textbf{if}} (n <= 0) ~ \textcolor{red}{\textbf{return}} res;\\
+    \hspace{0.5cm} res = res * n;\\
+    \hspace{0.5cm} n = n - 1;\\
+    \hspace{0.5cm}\textcolor{red}{\textbf{goto}} etiq;  \textcolor{green}{//saut en arrière!}\\
+    \}
+  \end{alltt}
+
+  Mais les sauts par \texttt{goto} rendent le code source illisible (code
+  \href{https://fr.wikipedia.org/wiki/Programmation_spaghetti}{spaghetti}), fameux papier
+  \href{https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf}{\textit{Go
+      To Statement Considered Harmful}} (Dijkstra, 1968)
+
+  Les deux variantes itératives pourraient être compilées ver le même
+  code machine!
+\end{frame}
+
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
+  \framesubtitle{factorielle en \textit{Scheme}}
+
+  \href{https://fr.wikipedia.org/wiki/Scheme}{Scheme} (1975) est un
+  \textcolor{red}{\textbf{très beau langage de programmation
+      minimaliste}} inspiré de
+  \href{https://fr.wikipedia.org/wiki/Lisp}{Lisp} (1958). \textbf{Tout
+    est expression}, et toute expression composite se code
+  \textbf{entre parenthèses} \textit{toujours significatives} :
+  \texttt{\textbf{(}} \textcolor{Navy}{\textit{opérateur}}
+  \textcolor{Navy}{\textit{opérande}$_1$} \textcolor{green}{\dots}
+  \textcolor{Navy}{\textit{opérande}$_n$}
+  \texttt{\textbf{)}}. \relsize{-1}{ Les noms permis en Scheme sont
+    bizarres: \texttt{\textit{letrec-syntax}} est un seul nom (un
+    quasi- mot-clé introduisant temporairement vos propres nouveaux
+    mots-clés).}
+
+  \vspace{0.3cm}
+  
+\href{https://www.gnu.org/software/guile/}{GNU \textsc{Guile}} est une implémentation de Scheme défini dans
+\href{https://schemers.org/Documents/Standards/R5RS/}{R5RS} (en
+\href{https://schemers.org/Documents/Standards/R5RS/r5rs.pdf}{seulement}
+50 pages). Voir \href{http://starynkevitch.net/Basile/guile-tutorial-1.html}{ce tutoriel d'initiation}
+    
+  \begin{alltt}
+    \textcolor{green}{;; fonction factorielle en Scheme, récursive}\\
+    (\textcolor{red}{\textbf{define}} (\textcolor{Olive}{fact} n)\\
+    ~ (\textcolor{red}{\textbf{if}} (< n 0) 1\\
+    \hspace{0.5cm}(* n (fact (- n 1)))))
+  \end{alltt}
+
+  \vspace{0.3cm}
+
+  {\large \textcolor{red}{\textbf{À lire absoluement}} le fameux et fabuleux \href{https://mitpress.mit.edu/sites/default/files/sicp/index.html}{\relsize{+3}{SICP}}}
+  (\textit{``structure and interpretation of computer programs''}) \textbf{en ligne} {\relsize{-1.5}{(au MIT, centaines de pages)}}
+  
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
+  \framesubtitle{d'une fonction à un programme}
+
+\textcolor{red}{\textbf{Les exemples de code précédents ne font rien}}
+et sont inutiles car incomplets. Il manque une spécification et le
+code glue pour appeler les fonctions définies.
+
+\vspace{0.5cm} On veut donc écrire un programme (exécutable)
+\texttt{impr-fact} qui imprime la factorielle de plusieurs arguments
+du programme. Par exemple \texttt{impr-fact 5 10} doit calculer et
+imprimer $5!$ et $10!$ donc afficher \texttt{120} suivi de
+\texttt{3628800}
+
+\vspace{1cm}
+
+\textbf{Le code source d'intendance sera plus gros en
+taille que le code source de la factorielle.}
+
+\end{frame}
+
 
 \begin{frame}
   \frametitle{Langages des développeurs Linux}
