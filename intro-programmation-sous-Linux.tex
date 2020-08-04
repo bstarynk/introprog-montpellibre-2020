@@ -1893,7 +1893,11 @@ taille que le code source de la factorielle.}
 
   On utilise un style de
   \href{https://fr.wikipedia.org/wiki/Programmation_fonctionnelle}{programmation
-    fonctionnelle} pour la lisibilité du code. Code non testé dans \texttt{intendance.ml} !
+    fonctionnelle} car notre fonction \texttt{traiter\_arg} est une
+  valeur (lire sur Wikipedia à propos des
+  \href{https://fr.wikipedia.org/wiki/Fermeture\_(informatique)}{fermetures})
+  passée à \texttt{Arg.parse}.... Code non testé dans
+  \texttt{intendance.ml} !
 
   \begin{alltt}
     \textcolor{red}{let} \textcolor{Olive}{imprime\_fact} n = Printf.printf "\%d\textbackslash{n}" (fact n) \textcolor{red}{in}\\
