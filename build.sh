@@ -6,12 +6,19 @@ for svgfile in *.svg ; do
     inkscape --batch-process --export-filename=$svgbase.pdf --export-type=pdf $svgfile
     inkscape --batch-process --export-filename=$svgbase.eps  --export-type=eps $svgfile
 done
+
 for dotfile in *.dot ; do
     dotbase=$(basename $dotfile .dot)
     dot -v -Teps -o $dotbase.eps  $dotfile
     dot -v -Tpdf -o $dotbase.pdf  $dotfile
     dot -v -Tsvg -o $dotbase.svg  $dotfile
 done
+
+for codfile in cod-*.c ; do
+    codbase=$(basename $codfile .c)
+    lgrind -i -lc $codfile > $codbase.tex
+done
+
 lualatex --shell-escape  --halt-on-error intro-programmation-sous-Linux
 lualatex --shell-escape  --halt-on-error intro-programmation-sous-Linux
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
