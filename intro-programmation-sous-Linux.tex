@@ -1630,6 +1630,62 @@ La commande \href{https://man7.org/linux/man-pages/man1/printenv.1.html}{printen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Langages des développeurs Linux}
+  \framesubtitle{la factorielle comme exemple}
+ 
+  La \href{https://fr.wikipedia.org/wiki/Factorielle}{factorielle} de
+  $n$ noté $n!$ est le nombre de permutations sur $n$ objets. On a $n!
+  = 1 \times 2 \times \ldots \times (n-1) \times n$ et la formule de
+  récurrence $n! = n \times (n-1)!$ dès que $n>1$ et bien sûr $1! = 1$
+
+  \vspace{0.5cm}
+  La factorielle compte le nombre de chemins circulaires entre
+  villes. Pour cinq villes (Annecy, Berlin, Casablanca, Dijon,
+  Erlangen) il y a $5! = 120$ circuits possibles. Pour treize villes,
+  il y a $13! = 6 227 020 800$ (plus de six milliards)
+
+  \vspace{0.5cm}
+  
+  Lire aussi sur
+  l'\href{https://fr.wikipedia.org/wiki/Explosion_combinatoire}{\textbf{explosion
+      combinatoire}} et le
+  \href{https://fr.wikipedia.org/wiki/Problème_du_voyageur_de_commerce}{problème
+    du voyageur de commerce} (donc l'optimisation des déplacements
+  d'un livreur).
+\end{frame}
+
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
+  \framesubtitle{factorielle en Ocaml}
+
+  En langage \href{https://ocaml.org/}{Ocaml}:
+
+  \begin{alltt}
+    \textcolor{green}{(*factorielle en Ocaml, récursivement*)}
+
+    \textcolor{red}{\textbf{let rec}} fact n = \\
+    \hspace{1cm} \textcolor{red}{\textbf{if}} n > 1  \textcolor{red}{\textbf{then}} n * fact (n - 1) \\
+    \hspace{1cm} \textcolor{red}{\textbf{else}} 1 \\
+     \textcolor{blue}{\textbf{;;}} 
+  \end{alltt}
+
+  itérativement avec recursion terminale
+  
+  \begin{alltt}
+    \textcolor{green}{(*factorielle en Ocaml, iterativement*)}
+
+    \textcolor{red}{\textbf{let}} fact n = \\
+    \hspace{1cm} \textcolor{red}{\textbf{let rec}} factloop n p = \\
+    \hspace{1.5cm} \textcolor{red}{\textbf{if}} n > 0  \\
+    \hspace{1.5cm} \textcolor{red}{\textbf{then}} factloop (n-1) (n * p) \\
+    \hspace{1.5cm} \textcolor{red}{\textbf{else}} p \\    
+    \hspace{1cm} \textcolor{red}{\textbf{in}} factloop n 1\\
+     \textcolor{blue}{\textbf{;;}} 
+  \end{alltt}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
   \framesubtitle{problème posé}
 
   Exemples: compter le nombre de mots dans plusieurs fichiers, et de plus en calculer la fréquence
