@@ -1,4 +1,4 @@
-% fichier Exposé-MontPellibre-juil2020/intro-programmation-sous-Linux.tex
+% fichier  introprog-montpellibre-2020/intro-programmation-sous-Linux.tex
 \documentclass[xcolor=svgnames,final,smaller,a4]{beamer}
 \usepackage{relsize}
 \usepackage{luacode}
@@ -81,8 +81,10 @@
     
     Ces transparents sont sous licence \href{https://creativecommons.org/licenses/by-sa/4.0/}{\includegraphics[scale=0.75]{CC-BY-SA-4}} \relsize{-1}{(CC-BY-SA-4)}
 
-    \vspace{1cm}
-          Le code \LaTeX ~ (\texttt{lualatex}) de cette présentation est en \href{https://github.com/bstarynk/introprog-montpellibre-2020/}{\texttt{github.com/bstarynk/introprog-montpellibre-2020}}
+    \vspace{1cm} Le code \LaTeX ~ (\texttt{lualatex}, tutoriel sur \href{https://www.tuteurs.ens.fr/logiciels/latex/}{www.tuteurs.ens.fr/logiciels/latex/}) de cette
+    présentation (construite avec le script \texttt{./build.sh}) est
+    en
+    \href{https://github.com/bstarynk/introprog-montpellibre-2020/}{\texttt{github.com/bstarynk/introprog-montpellibre-2020/}}
  \end{frame}
  
  \begin{frame}
@@ -984,7 +986,7 @@ Sur les supercalculateurs: milliards de fichiers, système de fichiers géants (
         : \\ \texttt{stat intro-programmation-sous-Linux.tex} produit
         :
 
-        \begin{relsize}{-0.5}
+        \begin{relsize}{-1}
         \begin{alltt}
           Fichier : intro-programmation-sous-Linux.tex\\
          Taille : 33520     	Blocs : 72         Blocs d'E/S : 4096   fichier \\
@@ -1397,17 +1399,90 @@ La commande \href{https://man7.org/linux/man-pages/man1/printenv.1.html}{printen
 
 \begin{frame}
   \frametitle{Fichiers et processus}
-  \framesubtitle{contexte d'exécution d'un processus: conventions}
+  \framesubtitle{contexte d'exécution d'un processus: conventions et combinaisons en pipeline de programmes}
+
+
+  Les descripteurs de fichiers usuels (entrée standard et sortie
+  standard) permettent conventionnellement de
+  {\textcolor{red}{\textbf{combiner des programmes simples}}} (par
+  exemple
+  \href{https://man7.org/linux/man-pages/man1/ls.1.html}{ls(1)}
+  listant des fichiers,
+  \href{https://man7.org/linux/man-pages/man1/grep.1.html}{grep(1)}
+  filtrant des motifs textuels,
+  \href{https://man7.org/linux/man-pages/man1/wc.1.html}{wc(1)}
+  comptant les mots ou les lignes)  {\textcolor{red}{\textbf{en un pipeline}}} ou
+  \href{https://fr.wikipedia.org/wiki/Tube_(informatique)}{tube} de
+  commandes, séparées par un pipe \textcolor{FireBrick}{$\vert$}
+  {\relsize{-1}{(voir aussi
+      \href{https://man7.org/linux/man-pages/man7/pipe.7.html}{pipe(7)})}}.
+
+  La sortie standard de la commande de gauche est reliée à l'entrée de
+  la commande de droite.
+
+  \begin{relsize}{+1}
+\begin{alltt}
+\hspace{1cm} ls -1 $\vert$ grep powerpc $\vert$ wc -l 
+\end{alltt}
+  \end{relsize}
   
-  @@@@ stdin, stdout, stderr, environ(7), \texttt{\$HOME} et \texttt{\$PATH}
+  va compter les fichiers dont le nom contient \texttt{powerpc} donc afficher \texttt{14} sur la sortie standard.
+
+  \vspace{0.5cm}
+  
+  Chaque ``pipe'' contient un tampon de données géré par le noyau
+  (avec \textbf{synchronisation des processus} communiquants).
+
 \end{frame}
 
 
 \begin{frame}
   \frametitle{Fichiers et processus}
-  \framesubtitle{conventions et importance de la ligne de commande}
+  \framesubtitle{conventions d'écriture des programmes}
 
-  @@@@
+  Il est de bon ton de \href{https://softwareengineering.stackexchange.com/a/307472/40065}{suivre les usages} ci-dessus:
+
+  \begin{relsize}{-1}
+    
+  \begin{itemize}
+
+    \item \textbf{favoriser les échanges entre programmes} par des
+      \href{https://fr.wikipedia.org/wiki/Format_ouvert}{formats
+        ouverts}, \textbf{documentés}, familiers et \textbf{textuels}
+      (voir aussi \href{https://json.org/}{JSON},
+      \href{https://fr.wikipedia.org/wiki/Extensible_Markup_Language}{XML},
+      \href{https://yaml.org/}{YAML} ...)
+
+      \item s'appuyer sur et \textbf{s'inspirer des commandes
+        existantes} donc avec des noms \textit{en anglais}
+
+    \item préférer la \textbf{lecture des données d'entrée sur
+      l'entrée standard} (souvent notée \texttt{-} ou
+      \texttt{/dev/stdin} dans les arguments du programme), et
+      l'\textbf{écriture des résultats de sortie sur la sortie standard}
+      (souvent passée comme \texttt{-} ou \texttt{/dev/stdout} en
+      argument de programme)
+
+
+  \item \textcolor{red}{\textbf{un programme qui fonctionne bien
+      reste silencieux}}
+
+%    et se termine en faisant un \textttt{exit(EXIT\_SUCCESS)} où
+%    \texttt{EXIT\_SUCCESS} est 0.
+%-
+%-    \item en cas d'erreur ou anomalie, produire un message d'erreur
+%-      sur la sortie d'erreur standard
+%-
+%-  \item \textbf{un programme échoue} avec au moins un
+%-    \textttt{exit(EXIT\_FAILURE)} où \texttt{EXIT\_FAILURE} est 1,
+%-    ou tout autre code d'erreur $>0$ et $<127$
+%-
+%-  \item tous les programmes acceptent les arguments \texttt{--help}
+%-    (donnant un message d'aide) et \texttt{--version} (donnant leur
+%-    version)
+
+  \end{itemize}
+  \end{relsize}
 \end{frame}
 
 
