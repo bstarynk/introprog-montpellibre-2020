@@ -1834,10 +1834,14 @@ C et C++), le standard \textit{C11} en
 
   \vspace{0.3cm}
   
-\href{https://www.gnu.org/software/guile/}{GNU \textsc{Guile}} est une implémentation de Scheme défini dans
+\href{https://www.gnu.org/software/guile/}{GNU \textsc{Guile}} est une
+implémentation de Scheme défini dans
 \href{https://schemers.org/Documents/Standards/R5RS/}{R5RS} (en
 \href{https://schemers.org/Documents/Standards/R5RS/r5rs.pdf}{seulement}
-50 pages). Voir \href{http://starynkevitch.net/Basile/guile-tutorial-1.html}{ce tutoriel d'initiation}
+50 pages). \href{https://www-sop.inria.fr/mimosa/fp/Bigloo/}{Bigloo}
+en est une autre (compilateur de Scheme vers C). Voir
+\href{http://starynkevitch.net/Basile/guile-tutorial-1.html}{ce
+  tutoriel d'initiation}
     
   \begin{alltt}
     \textcolor{green}{;; fonction factorielle en Scheme, récursive}\\
@@ -1882,18 +1886,24 @@ taille que le code source de la factorielle.}
   Lire \href{https://ocaml.org/releases/4.10/htmlman/index.html}{la
     documentation d'Ocaml} puis y utiliser le module
   \href{https://ocaml.org/releases/4.10/htmlman/libref/Arg.html}{\texttt{Arg}}
-  pour le traitement des arguments du programme,
-
-%  et la
-%  \href{http://caml.inria.fr/pub/docs/manual-ocaml/libref/Stdlib.html#VALint_of_string}{fonction
-%    standard \texttt{int\_of\_string}} pour convertir une chaîne en un
-%  entier.
+  pour le traitement des arguments du programme,  et la
+  \href{http://caml.inria.fr/pub/docs/manual-ocaml/libref/Stdlib.html\#VALint\_of\_string}{fonction
+    standard \texttt{int\_of\_string}} pour convertir une chaîne en un
+  entier.
 
   On utilise un style de
   \href{https://fr.wikipedia.org/wiki/Programmation_fonctionnelle}{programmation
-    fonctionnelle} pour la lisibilité du code.
+    fonctionnelle} pour la lisibilité du code. Code non testé dans \texttt{intendance.ml} !
+
+  \begin{alltt}
+    \textcolor{red}{let} \textcolor{Olive}{imprime\_fact} n = Printf.printf "\%d\textbackslash{n}" (fact n) \textcolor{red}{in}\\
+    \textcolor{red}{let} \textcolor{Olive}{traiter\_arg} a = imprime\_fact (int\_of\_string a)  \textcolor{red}{in}\\
+    Arg.parse [] traiter\_arg \\
+    \hspace{0.5cm}    "imprime la factorielle de chaque argument";;
+  \end{alltt}
   
-  
+  On compilerait avec la commande\\
+  \texttt{ocamlopt fact.ml intendance.ml -g -o impr-fact}
 \end{frame}
 
 
