@@ -1676,7 +1676,8 @@ La commande \href{https://man7.org/linux/man-pages/man1/printenv.1.html}{printen
     \textcolor{red}{rouge pour les mots-clés}.\\ {\small (certains
       langages de programmation -PL/1 ou Common Lisp- n'ont
       théoriquement pas de mots-clés \textit{réservés}, mais
-      pragmatiquement ils en ont)}
+      \href{https://www.cs.rochester.edu/~scott/pragmatics/}{pragmatiquement}
+      ils en ont)}
 
   \item des \textbf{commentaires} pour les dévelopeurs humains, en
     \textcolor{green}{vert pour les commentaires}
@@ -1873,6 +1874,28 @@ imprimer $5!$ et $10!$ donc afficher \texttt{120} suivi de
 taille que le code source de la factorielle.}
 
 \end{frame}
+
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
+  \framesubtitle{intendance de la factorielle en Ocaml}
+
+  Lire \href{https://ocaml.org/releases/4.10/htmlman/index.html}{la
+    documentation d'Ocaml} puis y utiliser le module
+  \href{https://ocaml.org/releases/4.10/htmlman/libref/Arg.html}{\texttt{Arg}}
+  pour le traitement des arguments du programme,
+
+%  et la
+%  \href{http://caml.inria.fr/pub/docs/manual-ocaml/libref/Stdlib.html#VALint_of_string}{fonction
+%    standard \texttt{int\_of\_string}} pour convertir une chaîne en un
+%  entier.
+
+  On utilise un style de
+  \href{https://fr.wikipedia.org/wiki/Programmation_fonctionnelle}{programmation
+    fonctionnelle} pour la lisibilité du code.
+  
+  
+\end{frame}
+
 
 
 \begin{frame}
