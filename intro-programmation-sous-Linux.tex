@@ -1453,33 +1453,32 @@ La commande \href{https://man7.org/linux/man-pages/man1/printenv.1.html}{printen
       \href{https://fr.wikipedia.org/wiki/Extensible_Markup_Language}{XML},
       \href{https://yaml.org/}{YAML} ...)
 
-      \item s'appuyer sur et \textbf{s'inspirer des commandes
-        existantes} donc avec des noms \textit{en anglais}
 
-    \item préférer la \textbf{lecture des données d'entrée sur
-      l'entrée standard} (souvent notée \texttt{-} ou
-      \texttt{/dev/stdin} dans les arguments du programme), et
-      l'\textbf{écriture des résultats de sortie sur la sortie standard}
-      (souvent passée comme \texttt{-} ou \texttt{/dev/stdout} en
-      argument de programme)
+    \item préférer ou permettre la \textbf{lecture des données
+      d'entrée sur l'entrée standard} {\relsize{-1}{(souvent notée
+        \texttt{-} ou \texttt{/dev/stdin} dans les arguments du
+        programme)}}, et l'\textbf{écriture des résultats de sortie
+      sur la sortie standard} {\relsize{-1}{(souvent passée comme
+        \texttt{-} ou \texttt{/dev/stdout} en argument de programme)}}
 
 
-  \item \textcolor{red}{\textbf{un programme qui fonctionne bien
-      reste silencieux}}
+  \item \textcolor{red}{\textbf{un programme qui fonctionne bien reste
+      silencieux}} et se termine en faisant un
+    \texttt{exit(EXIT\_SUCCESS)} où \texttt{EXIT\_SUCCESS} est 0.
 
-%    et se termine en faisant un \textttt{exit(EXIT\_SUCCESS)} où
-%    \texttt{EXIT\_SUCCESS} est 0.
-%-
-%-    \item en cas d'erreur ou anomalie, produire un message d'erreur
-%-      sur la sortie d'erreur standard
-%-
-%-  \item \textbf{un programme échoue} avec au moins un
-%-    \textttt{exit(EXIT\_FAILURE)} où \texttt{EXIT\_FAILURE} est 1,
-%-    ou tout autre code d'erreur $>0$ et $<127$
-%-
-%-  \item tous les programmes acceptent les arguments \texttt{--help}
-%-    (donnant un message d'aide) et \texttt{--version} (donnant leur
-%-    version)
+    \item en cas d'erreur ou anomalie, produire un message d'erreur
+      sur la sortie d'erreur standard
+
+  \item \textbf{un programme échoue} avec au moins un
+    \texttt{exit(EXIT\_FAILURE)} où \texttt{EXIT\_FAILURE} est 1,
+    ou tout autre code d'erreur \textit{documenté} $>0$ et $<127$
+
+  \item \textcolor{red}{\textbf{tous les programmes acceptent les arguments}} \textbf{\texttt{--help}}
+    (donnant un message d'aide) et \textbf{\texttt{--version}} (donnant leur
+    version)
+    
+      \item s'appuyer sur et \textcolor{red}{\textbf{s'inspirer des commandes
+        existantes}} donc avec des noms d'option \textit{en anglais}
 
   \end{itemize}
   \end{relsize}
