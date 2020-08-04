@@ -1916,15 +1916,166 @@ taille que le code source de la factorielle.}
   \frametitle{Langages des développeurs Linux}
   \framesubtitle{intendance de la factorielle en \textit{C}}
 
-  Il faudrait lire le chapitre
-  \href{https://www.gnu.org/software/libc/manual/html_node/Parsing-Program-Arguments.html}{parsing
-    program arguments} pour fournir le traitement convenable d' un \texttt{--help} et
-  \texttt{--version}. Sans ça, dans un fichier \texttt{intendance.c} contenant :
+Il faudrait lire le chapitre
+\href{https://www.gnu.org/software/libc/manual/html_node/Parsing-Program-Arguments.html}{parsing
+  program arguments} pour fournir le traitement convenable d' un
+\texttt{--help} et \texttt{--version}. Sans ça (voir \href{https://man7.org/linux/man-pages/man3/atoi.3.html}{atoi(3)}
+et \href{https://man7.org/linux/man-pages/man3/printf.3.html}{printf(3)}) dans
+un fichier \texttt{intendance.c} contenant :
 
-%  \lgrindfile{cod-intendance.tex}
-
+%  \begin{relsize}{-2}
+  \lgrindfile{cod-intendance.tex}
+ % \end{relsize}
+  
 \end{frame}
 
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
+  \framesubtitle{pièges de la programmation en \textit{C} sous Linux}
+
+  Ils sont nombreux, lire attentivement la documentation de \href{http://gcc.gnu.org/}{GCC}:
+
+  \begin{itemize}
+    \item l'\href{https://fr.wikipedia.org/wiki/Allocation_de_mémoire}{\textbf{allocation de la mémoire}}
+  \item les \href{https://fr.wikipedia.org/wiki/Dépassement_de_tampon}{\textbf{dépassements de tampon}} (``buffer overflow'')
+  \item les
+    \href{https://fr.wikipedia.org/wiki/Fuite_de_mémoire}{\textbf{fuites
+        de mémoire}} - utiliser
+    \href{https://valgrind.org/}{\texttt{valgrind}} et \href{https://en.wikipedia.org/wiki/AddressSanitizer}{\textit{Address Sanitizer}}
+    \item les
+      \href{https://fr.wikipedia.org/wiki/Erreur_de_segmentation}{\textbf{erreur
+          de segmentation}} et autres atteintes à l'espace
+      d'addressage
+      \item le traitements des signaux (voir
+        \href{https://man7.org/linux/man-pages/man7/signal.7.html}{signal(7)}
+        et
+        \href{https://man7.org/linux/man-pages/man7/signal-safety.7.html}{signal-safety(7)} etc...)
+      \item les appels systèmes qui échouent (voir aussi  \href{https://man7.org/linux/man-pages/man3/errno.3.html}{errno(3)} et  \href{https://man7.org/linux/man-pages/man3/perror.3.html}{perror(3)})
+        \item les \textcolor{red}{\textbf{comportements indéfinis}} :
+          lire
+          \href{http://blog.llvm.org/2011/05/what-every-c-programmer-should-know.html}{\textit{What
+              Every C Programmer Should Know About Undefined
+              Behavior}}
+  \end{itemize}
+
+  Voir aussi (en 2020) mon \href{http://starynkevitch.net/Basile/bismon-chariot-doc.pdf}{brouillon de rapport sur \textsc{Bismon}}.
+
+  Compiler
+  \href{https://gcc.gnu.org/onlinedocs/gcc/Invoking-GCC.html}{avec}
+  \texttt{gcc -Wall -Wextra -g} et utiliser en 2020 un
+  \href{http://gcc.gnu.org/}{GCC} récent (au moins
+  \href{https://gcc.gnu.org/gcc-10/}{GCC 10}), peut-être avec votre
+  \href{https://gcc.gnu.org/onlinedocs/gccint/Plugins.html}{greffon de
+    GCC}. Envisager l'utilisation d'outils comme
+  \href{https://frama-c.com/}{\textsc{Frama-C}} ou
+  \href{https://clang-analyzer.llvm.org/}{\textsc{Clang} static
+    analyzer}.
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
+  \framesubtitle{avantages de la programmation en \textit{C} sous Linux}
+
+  \textit{C} est un ``langage assembleur portable''. Nombreux avantages aussi:
+
+  \begin{itemize}
+
+  \item  \textcolor{red}{\textbf{foultitude d'exemples}}; penser à \textcolor{red}{\textbf{la métaprogrammation}} (vos générateurs de code C spécialisés)
+    
+  \item qualité des compilateurs (essayer
+    \href{http://gcc.gnu.org/}{GCC} \textbf{et}
+    \href{https://clang.llvm.org}{Clang} et lire leur documentation)
+    et leurs facultés d'
+    \href{https://en.wikipedia.org/wiki/Optimizing_compiler}{optimisations}
+
+  \item qualité et quantité des bibliothèques: \href{https://tldp.org/HOWTO/Program-Library-HOWTO/}{Program Library HowTo}
+
+  \item bibliothèques partagées
+    \href{https://www.akkadia.org/drepper/dsohowto.pdf}{\textit{How To
+        Write Shared Libraries}} donc vos
+    \href{https://fr.wikipedia.org/wiki/Plugin}{greffons} grâce à
+    \href{https://www.man7.org/linux/man-pages/man3/dlopen.3.html}{dlopen(3)}
+    et
+    \href{https://www.man7.org/linux/man-pages/man3/dlsym.3.html}{dlsym(3)}
+
+  \item débogueur \href{https://www.gnu.org/software/gdb/}{GDB} avec:
+    \begin{itemize}
+    \item points d'arrêts \href{https://sourceware.org/gdb/current/onlinedocs/gdb/Breakpoints.html}{breakpoints}
+    \item arrêt sur changement de mémoire \href{https://sourceware.org/gdb/current/onlinedocs/gdb/Set-Watchpoints.html}{watchpoints}
+    \item scriptable en Guile et en Python
+    \end{itemize}
+
+  \item  \textcolor{red}{\textbf{génération de code à la volée}}, par exemple avec \href{https://gcc.gnu.org/onlinedocs/jit/}{libgccjit}
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
+  \framesubtitle{Programmation en \textit{C++}, \textit{Rust}, \textit{OpenCL} sous Linux}
+
+  C++ (lire
+  \href{https://www.stroustrup.com/programming.html}{Programming --
+    Principles and Practice Using C++} puis le site
+  \href{https://en.cppreference.com/w/cpp}{C++ reference} puis la
+  norme C++11
+  \href{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{n3337})
+  est un langage difficile à apprendre, peut-être obsolescent, mais
+  compatible avec C.
+
+  \begin{itemize}
+  \item language complexe et difficile à apprendre
+  \item bibliothèque standard riche, notamment par ses \href{https://en.cppreference.com/w/cpp/container}{containers}
+    \item pleins de bibliothèques sous Linux, dont
+      \href{https://qt.io}{Qt}, \href{https://fltk.org/}{FLTK}
+      (interface graphique), \href{https://www.webtoolkit.eu/wt}{Wt}
+      (web), \href{https://www.vmime.org/}{Vmime} (courriel),
+      \href{https://pocoproject.org/}{Poco} (internet et réseau), \href{https://www.sfml-dev.org/}{SFML} (jeu et multimédia)
+      \item de gros logiciels libres sont codés en C++:
+        \href{http://libreoffice.org/}{\textsc{LibreOffice}}
+        (bureautique),
+        \href{https://www.mozilla.org/fr/firefox/}{\textsc{Mozilla
+            Firefox}} (navigateur Web)
+  \end{itemize}
+
+  \href{https://www.rust-lang.org/}{\textsc{Rust}} est à préférer à
+  C++ pour de nouveaux développements dont le code est proche du
+  matériel ou doit être efficace ou robuste.
+
+  \href{https://fr.wikipedia.org/wiki/OpenCL}{OpenCL} ressemble au C
+  mais tourne vectoriellement sur GPU (cartes graphiques). Pour le
+  calcul vectoriel ou matriciel intensif.
+  
+  \end{frame}
+
+
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
+  \framesubtitle{Programmation en \textit{Ocaml},  \textit{Haskell}, \textit{Go}, \textit{Common Lisp} etc... sous Linux}
+
+  \begin{itemize}
+\item \href{https://www.ocaml.org/}{\textsc{ocaml}} est fonctionnel,
+  fortement typé, vivant. Utilisé dans le démonstrateur de théorèmes /
+  assistant de preuves
+  \href{https://coq.inria.fr/}{\textsc{Coq}}. Faiblesse en 2020:
+  support du multi-threading insuffisant.
+  
+\item  \href{https://www.haskell.org/}{\textsc{Haskell}} est fonctionnel,
+  puissant et ``mathématique'' car
+  \textcolor{red}{\textbf{déclaratif}}, paresseux et efficace. 
+
+\item  \href{https://go-lang.org}{\textsc{Go}} pourrait remplacer \href{http://python.org/}{Python} (quasi mort, moche) ou PHP (dinosaure, enterré).
+
+
+\item  \href{https://fr.wikipedia.org/wiki/Common_Lisp}{Common Lisp} est très puissant, ressemble à \textit{Scheme}, homo-iconique donc favorisant la métaprogrammation. \href{https://sbcl.org/}{SBCL} est une excellente implémentation.
+
+\item les ancêtres \textbf{Python, TCL, shells, Perl, PHP} ne devraient être considérés
+  que pour les vieux logiciels libres. \textcolor{red}{\textbf{à
+      proscrire}} sauf si on est obligé.
+  \end{itemize}
+\end{frame}
 
 \begin{frame}
   \frametitle{Langages des développeurs Linux}

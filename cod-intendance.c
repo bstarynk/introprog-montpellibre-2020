@@ -1,10 +1,6 @@
 /* fichier intendance.c */
-
-// le fichier d'entête pour printf
-#include <stdio.h>
-
-// le fichier d'entête pour atoi
-#include <stdlib.h>
+#include <stdio.h> /* pour printf */
+#include <stdlib.h> /* pour atoi */
 
 extern long fact (int);
 int main(int argc, char**argv) {
@@ -15,4 +11,3 @@ int main(int argc, char**argv) {
   exit(EXIT_SUCCESS);
 }
 /* fin du fichier intendance.c */
-	   
