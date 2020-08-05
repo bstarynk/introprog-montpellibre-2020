@@ -1584,6 +1584,8 @@ La commande \href{https://man7.org/linux/man-pages/man1/printenv.1.html}{printen
  %%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 \section{Outils et langages des développeurs Linux}
 
+\subsection{outillage}
+
 \begin{frame}
   \frametitle{Outils des développeurs Linux}
 
@@ -1643,6 +1645,8 @@ La commande \href{https://man7.org/linux/man-pages/man1/printenv.1.html}{printen
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{langages et paradigmes de programmation}
+
 \begin{frame}
   \frametitle{Langages des développeurs Linux}
   \framesubtitle{la factorielle comme exemple}
@@ -2242,6 +2246,114 @@ un fichier \texttt{intendance.c} contenant :
     \item l'excellent livre de \href{https://pages.lip6.fr/Christian.Queinnec/WWW/}{Christian Queinnec} : \href{https://hal.inria.fr/hal-01305784/}{\textit{Principes d'implantation de Scheme et Lisp}}
   \end{itemize}
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{bases de données}
+
+\begin{frame}
+  \frametitle{Langage des développeurs Linux}
+  \framesubtitle{les bases de données}
+
+  Il faut faire attention à bien stocker les données sur le disque et à la sauvegarder. 
+
+  \vspace{0.3cm}
+  
+  Une \href{https://fr.wikipedia.org/wiki/Base_de_données}{base de
+    données} organise et traite les données applicatives en rapport
+  avec un problème. Elles sont nécessaires car à l'arrêt d'un PC Linux
+  l'information en RAM est perdue, et quand on veut traiter une grosse quantité de données (gigaoctets)
+
+  Les \href{https://fr.wikipedia.org/wiki/Système_de_gestion_de_base_de_données}{systèmes de gestion de base de données} (SGBD) sont de plusieurs sortes:
+
+  \begin{itemize}
+  \item base de données relationnelles : serveur
+    \href{https://postgresql.org}{\textsc{PostGreSQL}}, bibliothèque
+    \href{https://sqlite.org/}{Sqlite} utilisant le langage
+    \href{https://fr.wikipedia.org/wiki/Structured_Query_Language}{Structured
+      Query Language} (SQL)
+  
+  \item base de données destructurées ou indexées : serveur
+    \href{https://redis.org}{\textsc{redis}}, bibliothèque
+    \href{https://www.gnu.org.ua/software/gdbm/}{GDBM} etc
+
+  \item base de données ``document'' comme \href{https://www.mongodb.com}{MongoDB} ou \href{https://cassandra.apache.org/}{Cassandra} etc...
+
+  \item requêtes et transactions vers une base de données
+    
+  \end{itemize}
+
+\textcolor{red}{\textbf{Penser à la sauvegarde!}}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Langage des développeurs Linux}
+  \framesubtitle{bases de données relationnelles}
+
+On représente dans quelques tables des relations n-aires. On fait
+attention à la
+\href{https://en.wikipedia.org/wiki/Database_normalization}{normalisation
+  de la base de données} pour éviter les incohérences et les
+redondances. Une table peut avoir des dizaines de colonnes et des
+millions de rangées.
+
+Voir \href{https://sql.sh/}{ce cours et tutoriel sur SQL}
+
+On crée une table par une requête SQL décrivant les colonnes telle que:
+
+\begin{relsize}{-1}
+\begin{alltt}
+  \textcolor{red}{CREATE TABLE} \textcolor{Olive}{table\_etudiants} (\\
+  \hspace{0.5cm} \textcolor{Olive}{id\_etudiant} SERIAL,\\
+  \hspace{0.5cm} \textcolor{Olive}{nom\_etudiant} VARCHAR(40)  \textcolor{red}{NOT NULL},\\
+  \hspace{0.5cm} \textcolor{Olive}{prenom\_etudiant} VARCHAR(20),\\
+  \hspace{0.5cm} \textcolor{Olive}{naissance\_etudiant} DATE\\
+   );
+\end{alltt}
+\end{relsize}
+
+On la remplit par des milliers de requêtes d'insertion telles que:
+\begin{relsize}{-1}
+\begin{alltt}
+  \textcolor{red}{INSERT INTO} table\_etudiants\\
+  \hspace{0.5cm} (nom\_etudiant, prenom\_etudiant, naissance\_etudiant)\\
+  \textcolor{red}{VALUES} ("Dupont", "Jean", "1995-10-03");
+\end{alltt}
+\end{relsize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Langage des développeurs Linux}
+  \framesubtitle{bases de données relationnelles (interrogation)}
+
+  On peut ensuite interroger la base, par exemple
+
+\begin{relsize}{-1}
+\begin{alltt}
+  \textcolor{red}{SELECT} id\_etudiant, prenom\_etudiant \textcolor{red}{FROM} table\_etudiants\\
+  \hspace{0.5cm}\textcolor{red}{WHERE} nom\_etudiant = "Dupont" ;
+\end{alltt}
+\end{relsize}
+
+pour obtenir l'identifiant et le prénom de tous les étudiants qui s'appellent \texttt{Dupont}
+
+\vspace{0.5cm}
+
+Pour des raisons d'efficacité, il faut \textbf{créer des index de table} et des \textbf{requêtes préparées} (``prepared statements'')
+
+\vspace{1cm}
+
+\hrule
+
+\vspace{0.2cm}
+
+On peut faire des \href{https://docs.postgresql.fr/12/tutorial-join.html}{jointures entre tables} (composer les relations entre tables) et c'est toute la puissance du modèle relationnel.
+
+
+\end{frame}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
