@@ -1934,6 +1934,81 @@ un fichier \texttt{intendance.c} contenant :
 
 \begin{frame}
   \frametitle{Langages des développeurs Linux}
+  \framesubtitle{compilation de la factorielle en \textit{C}}
+
+  \begin{relsize}{-1}
+  Il faudrait avoir un
+  \href{https://en.wikipedia.org/wiki/Makefile}{\texttt{Makefile}} (où
+  la tabulation est significative); lire la documentation de
+  \href{https://www.gnu.org/software/make/}{GNU \texttt{make}} et
+  lancer \texttt{make -p} pour en comprendre les règles prédéfinies.
+  \end{relsize}
+  
+  \vspace{0.3cm}
+  
+  En attendant, on peut
+  \href{https://fr.wikipedia.org/wiki/Compilateur}{compiler} et relier
+  (par le
+  \href{https://en.wikipedia.org/wiki/Linker_(computing)}{``linker''}
+  \texttt{ld} de \href{https://www.gnu.org/software/binutils/}{GNU
+    \textit{binutils}}) les deux unités de compilation
+  (``\href{https://en.wikipedia.org/wiki/Translation_unit_(programming)}{translation
+    unit}s'') \texttt{fact.c} et \texttt{intendance.c} avec
+  \href{https://man7.org/linux/man-pages/man1/gcc.1.html}{gcc(1)} par
+  la commande:\\ \textbf{\texttt{gcc -Wall -Wextra -O -g fact.c intendance.c
+    -o impr-fact}} (qui lance des processus \texttt{cc1}, \texttt{as},
+  \texttt{ld}).
+
+  \vspace{0.2cm}
+  
+  \begin{relsize}{-0.5}
+  Les options \texttt{-Wall -Wextra} demande les très
+  \textcolor{red}{utiles avertissements (``warnings'') du
+    compilateur}, et l'option \texttt{-g} les informations de
+  déboguage au format
+  \href{https://en.wikipedia.org/wiki/DWARF}{DWARF} au profit du
+  débogueur
+  \href{https://man7.org/linux/man-pages/man1/gdb.1.html}{gdb(1)}. L'option
+  \texttt{-O} (ou \texttt{-O2} ou \texttt{-O3} ou \texttt{-Os})
+  déclenche les optimisations du compilateur (code généré plus rapide,
+  temps de compilation plus grand). L'ordre des arguments à
+  \href{https://man7.org/linux/man-pages/man1/gcc.1.html}{gcc(1)} est
+  important.
+  \end{relsize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
+  \framesubtitle{examen du code assembleur produit par \texttt{gcc}}
+
+  \textbf{La commande \texttt{gcc -O -fverbose-asm -S fact.c} produit
+    le fichier assembleur \texttt{fact.s} obtenu de \texttt{fact.c}}
+  qu'on peut ensuite examiner avec un éditeur tel que \texttt{emacs}.
+
+  \vspace{0.5cm}
+  
+  On y devine les conventions d'appel
+  (\href{https://en.wikipedia.org/wiki/Calling_convention}{calling
+    convention}) du x86-64 sous Linux, documentées dans wikipedia
+  \href{https://en.wikipedia.org/wiki/X86_calling_conventions}{x86
+    calling conventions} et surtout
+  \href{https://raw.githubusercontent.com/wiki/hjl-tools/x86-psABI/x86-64-psABI-1.0.pdf}{System
+    V Application Binary Interface AMD64 Architecture Processor
+    Supplement}
+
+  \vspace{0.5cm}
+
+  \begin{relsize}{-1}
+    On peut obtenir (par exemple avec \texttt{-fdump-tree-all}...) les
+    nombreuses \textbf{représentations intermédiaires du compilateur}
+    \href{http://gcc.gnu.org/}{GCC} notamment
+    \href{https://gcc.gnu.org/onlinedocs/gccint/GIMPLE.html}{GIMPLE}
+  \end{relsize}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
   \framesubtitle{pièges de la programmation en \textit{C} sous Linux}
 
   Ils sont nombreux, lire attentivement la documentation de \href{http://gcc.gnu.org/}{GCC}:
@@ -2080,8 +2155,135 @@ un fichier \texttt{intendance.c} contenant :
   \end{itemize}
 \end{frame}
 
+
+
 \begin{frame}
   \frametitle{Langages des développeurs Linux}
+  \framesubtitle{paradigmes de programmation}
+  différents \href{https://fr.wikipedia.org/wiki/Paradigme_(programmation)}{\textbf{paradigmes de programmation}}:
+
+  \begin{itemize}
+  \item \href{https://fr.wikipedia.org/wiki/Programmation_impérative}{programmation impérative} (C, Rust, Ocaml)
+    
+    \item \href{https://fr.wikipedia.org/wiki/Programmation_orienté_objet}{programmation orientée objet} (C++, Java, JavaScript, Go, Ocaml, \href{http://lua.org/}{Lua}, \href{https://iolanguage.org/}{Io}...) \href{https://fr.wikipedia.org/wiki/Smalltalk}{SmallTalk}, \href{http://stephane.ducasse.free.fr/Teaching/Archives/STOBJ/allPapers.pdf}{\textit{Metaclasses are First Class: the ObjVLisp model}}
+
+    \item
+      \href{https://fr.wikipedia.org/wiki/Programmation_fonctionnelle}{programmation
+        fonctionnelle} (Ocaml, Scheme, Lisp, Haskell) et
+      \href{https://fr.wikipedia.org/wiki/Lambda-calcul}{$\lambda$-calcul}
+
+      
+    \item
+      \href{https://fr.wikipedia.org/wiki/Programmation_logique}{programmation
+        logique} avec des prédicats
+      (\href{https://fr.wikipedia.org/wiki/Prolog}{Prolog}....) et
+      \href{https://fr.wikipedia.org/wiki/Programmation_par_contraintes}{programmation
+        par contraintes} (\href{https://eclipseclp.org/}{ECLiPSe}...)
+
+    \item
+      \href{https://fr.wikipedia.org/wiki/Programmation_concurrente}{programmation
+        concurrente} -multic{\oe}eur-
+      \href{https://computing.llnl.gov/tutorials/pthreads/}{Pthreads}
+      en C, \textit{Go} et
+      \href{https://fr.wikipedia.org/wiki/Pi-calcul}{$\pi$-calcul}
+
+    \item
+      \href{https://fr.wikipedia.org/wiki/Programmation_événementielle}{Programmation
+        événementielle}, notamment les serveurs et les interfaces
+      graphiques, avec une boucle d'événements centrée sur
+      \href{https://man7.org/linux/man-pages/man2/poll.2.html}{poll(2)}
+      ou mieux. Voir \href{https://ocsigen.org/}{Ocsigen} pour coder des applications Web.
+      
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Langages des développeurs Linux}
+  \framesubtitle{pour en savoir plus sur les langages}
+
+  \begin{itemize}
+
+    \item
+      \href{https://fr.wikipedia.org/wiki/Analyse_lexicale}{analyse
+        lexicale}, syntaxe des langages de programmation et sa notation en
+      \href{https://fr.wikipedia.org/wiki/Extended_Backus-Naur_Form}{Extended
+        Backus-Naur Form} (EBNF),
+      \href{https://fr.wikipedia.org/wiki/Analyse_syntaxique}{analyse
+        syntaxique}, \href{https://en.wikipedia.org/wiki/Abstract_syntax_tree}{abstract syntax tree}
+
+    \item
+      \href{https://fr.wikipedia.org/wiki/Sémantique_des_langages_de_programmation}{sémantique
+        des langages de programmation},
+      \href{https://fr.wikipedia.org/wiki/Sémantique_dénotationnelle}{sémantique
+        dénotationnelle} et
+      \href{https://fr.wikipedia.org/wiki/Théorie_des_types}{théorie
+        des types}, \href{https://fr.wikipedia.org/wiki/Inférence_de_types}{inférence de types}
+      
+    \item survol des langages:
+      \href{https://www.filepicker.io/api/file/jjQ29xA9RP29juOcGbRL}{\textit{Scott:
+          Programming Language Pragmatics}}
+
+    \item techniques de compilation:
+      \href{https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools}{Dragon
+        Book} - indispensables à connaître, car elles sont partout
+      (i.e. \href{https://en.wikipedia.org/wiki/Recursive_descent_parser}{recursive
+        descent parsing} JSON ou XML ou HTML ou HTTP). Générateurs
+      d'analyseurs syntaxiques:
+      \href{https://www.gnu.org/software/bison/}{GNU \textsc{bison}}
+      et \href{https://antlr.org/}{ANTLR}
+
+    \item gestion de la mémoire :
+      \href{https://fr.wikipedia.org/wiki/Ramasse-miettes_(informatique)}{ramasse-miettes}
+      (``garbage collector'' ou ``glaneur de cellules'' donc
+      \href{https://gchandbook.org/}{Garbage Collection Handbook}
+
+    \item l'excellent livre de \href{https://pages.lip6.fr/Christian.Queinnec/WWW/}{Christian Queinnec} : \href{https://hal.inria.fr/hal-01305784/}{\textit{Principes d'implantation de Scheme et Lisp}}
+  \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{aspects algorithmiques}
+
+
+\begin{frame}
+  \frametitle{Langage des développeurs Linux}
+  \framesubtitle{aspects algorithmiques}
+
+  Le livre
+  \textcolor{red}{\textbf{\href{https://en.wikipedia.org/wiki/Introduction_to_Algorithms}{\textit{Introduction
+          to Algorithms}} est à lire absoluement}}
+
+  \begin{itemize}
+
+  \item les \href{https://fr.wikipedia.org/wiki/Type_abstrait}{types
+    abstraits} et les
+    \href{https://fr.wikipedia.org/wiki/Structure_de_données}{structures
+      de données}
+    
+  \item la \href{https://fr.wikipedia.org/wiki/Recherche_dichotomique}{recherche dichotomique} - deviner en 20 questions oui/non un mot dans un dictionnaire
+
+  \item les \href{https://fr.wikipedia.org/wiki/Arbre_binaire_de_recherche}{arbres binaires de recherche} notamment \href{https://fr.wikipedia.org/wiki/Arbre_bicolore}{arbre bicolore rouge-noir}
+
+  \item les \href{https://fr.wikipedia.org/wiki/Table_de_hachage}{table de hachage}
+
+  \item etc.
+    
+  \end{itemize}
+
+  
+\end{frame}
+
+
+
+
+
+ %%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\section{Exercice de programmation}
+\begin{frame}
+  \frametitle{Exercice de programmation}
   \framesubtitle{problème posé}
 
   Exemples: compter le nombre de mots dans plusieurs fichiers, et de plus en calculer la fréquence
